@@ -50,7 +50,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
     this.filter_items = function(id){
       if(main.id1==2)
       {
-        this.currentPage = 0;
+        main.currentPage = 0;
         main.second_click="Enter Name";
         main.filter_item="";
         main.filter_item=$('#filter_entered').val();
@@ -59,14 +59,14 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
       }
       if(main.id1==1&&main.id2==0)
       {
-        this.currentPage = 0;
+          main.currentPage = 0;
         main.second_click="None";
         main.filter_item={};
         console.log(main.filter_item);
       }
       if(main.id1==1&&main.id2==1)
       {
-        this.currentPage = 0;
+          main.currentPage = 0;
         main.second_click="Books";
         main.filter_item={};
         main.filter_item.isbn="";
@@ -74,7 +74,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
       }
       if(main.id1==1&&main.id2==2)
       {
-        this.currentPage = 0;
+          main.currentPage = 0;
         main.second_click="Characters";
         main.filter_item={};
         main.filter_item.gender="";
@@ -82,7 +82,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
       }
       if(main.id2==3)
       {
-        this.currentPage = 0;
+        main.currentPage = 0;
         main.second_click="Houses";
         main.filter_item={};
       main.filter_item.region="";
@@ -99,6 +99,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
             return 1;
           return 0;
         }
+          main.currentPage = 0;
         main.loadList.sort(compare);
 
     }
@@ -112,6 +113,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
             return 1;
           return 0;
         }
+          main.currentPage = 0;
         main.loadList.sort(compare);
     }
 
