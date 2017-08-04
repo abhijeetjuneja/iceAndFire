@@ -14,6 +14,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
     this.currentPage = 0;
     this.pageSize = 10;
     this.data = [];
+    this.loading=true;
     this.numberOfPages=function(l){
         return Math.ceil(l/main.pageSize);
     }
@@ -113,6 +114,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
             return 1;
           return 0;
         }
+        console.log("called");
           main.currentPage = 0;
         main.loadList.sort(compare);
     }
@@ -124,7 +126,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
       IceAndFireService.getBooks()
         .then(function successCallback(response){
 
-
+          main.loading=true;
           main.loadList=response.data;
 
           main.loadChar(1);
@@ -184,7 +186,9 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
             else {
               main.sortList();
               console.log(main.loadList);
+              main.loading=false;
             }
+
           }, function errorCallback(response){
 
             console.log(response);

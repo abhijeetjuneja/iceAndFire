@@ -3,6 +3,13 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider,$locat
     $routeProvider
         .when('/',{
             // location of the template
+            templateUrl     : 'views/index-view.html',
+            // Which controller it should use
+          controller        : 'mainController',
+            controllerAs    : 'main'
+        })
+        .when('/list',{
+            // location of the template
         	templateUrl		: 'views/list-view.html',
         	// Which controller it should use
           controller 		: 'listController',

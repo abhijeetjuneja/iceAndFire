@@ -3,7 +3,9 @@
 app.controller('detailController',['$http','IceAndFireService',function($http,IceAndFireService){
 
     var main=this;
-
+    this.bcount=0;
+    this.ccount=0;
+    this.hcount=0;
     this.loadList={};
     this.charList=[];
     this.charSet="";
@@ -14,7 +16,14 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
     this.houseIndex=0;
     this.houseSet="";
     this.houseList=[];
+    this.loading=true;
 
+
+   
+
+    this.goBack =function() {
+    window.history.back();
+    };
 
     //Get list of list of characters appeared in a book
     this.getCharacters = function(chars,l){
@@ -44,7 +53,21 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
           }
           else {
             main.charSet=main.charList.join();
-            console.log(main.charSet);
+            console.log(main.charSet); 
+            setTimeout(function(){
+              main.loading=false;
+              $(".spinner").css('display','none');
+              $(".detailBook").show();
+                var h1;
+              var h2=$("#wrapper").height();
+             if(h2<window.innerHeight)
+             {
+              var h3=$("body").height();
+              h1=h3-h2;
+              $("#myFooter").css('margin-top',h1);
+             }
+            },3000);
+           
           }
           }, function errorCallback(response,type){
             console.log(baseUrl);
@@ -57,6 +80,22 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
             }
             else {
               console.log(main.charSet);
+                setTimeout(function(){
+              main.loading=false;
+              $(".spinner").css('display','none');
+              $(".detailBook").show();
+                 var h1;
+              var h2=$("#wrapper").height();
+             if(h2<window.innerHeight)
+             {
+              var h3=$("body").height();
+              h1=h3-h2;
+              $("#myFooter").css('margin-top',h1);
+             }
+            },3000);
+           
+            
+
             }
           }
           );
@@ -89,8 +128,22 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
           else {
 
             main.bookSet=main.bookList.join();
-
+          
             main.bookIndex=0;
+             setTimeout(function(){
+              main.loading=false;
+              $(".spinner").css('display','none');
+              $(".detailBook").show();
+                 var h1;
+              var h2=$("#wrapper").height();
+             if(h2<window.innerHeight)
+             {
+              var h3=$("body").height();
+              h1=h3-h2;
+              $("#myFooter").css('margin-top',h1);
+             }
+            },3000);
+           
           }
           }, function errorCallback(response,type){
             console.log(baseUrl);
@@ -102,7 +155,20 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
               main.getBooks(chars,l);
             }
             else {
-
+               setTimeout(function(){
+              main.loading=false;
+              $(".spinner").css('display','none');
+              $(".detailBook").show();
+                 var h1;
+              var h2=$("#wrapper").height();
+             if(h2<window.innerHeight)
+             {
+              var h3=$("body").height();
+              h1=h3-h2;
+              $("#myFooter").css('margin-top',h1);
+             }
+            },3000);
+           
             }
           }
           );
@@ -140,6 +206,21 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
             main.houseSet=main.houseList.join();
             console.log(main.houseSet);
             main.houseIndex=0;
+             setTimeout(function(){
+              main.loading=false;
+              $(".spinner").css('display','none');
+              $(".detailBook").show();
+                 var h1;
+              var h2=$("#wrapper").height();
+             if(h2<window.innerHeight)
+             {
+              var h3=$("body").height();
+              h1=h3-h2;
+              $("#myFooter").css('margin-top',h1);
+             }
+            },3000);
+           
+            
           }
           }, function errorCallback(response,type){
             console.log(baseUrl);
@@ -152,6 +233,20 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
             }
             else {
               console.log(main.houseSet);
+               setTimeout(function(){
+              main.loading=false;
+              $(".spinner").css('display','none');
+              $(".detailBook").show();
+                 var h1;
+              var h2=$("#wrapper").height();
+             if(h2<window.innerHeight)
+             {
+              var h3=$("body").height();
+              h1=h3-h2;
+              $("#myFooter").css('margin-top',h1);
+             }
+            },3000);
+           
             }
           }
           );
@@ -166,8 +261,12 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
 
 
           main.loadList=response.data;
+          main.loading=true;
+
           if(main.loadList.hasOwnProperty('povCharacters'))
           {
+            
+
             main.getCharacters(main.loadList.povCharacters,main.loadList.povCharacters.length);
           }
           else
@@ -195,11 +294,12 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
             main.getHouses(main.loadList.cadetBranches,main.loadList.cadetBranches.length);
           }
           console.log(main.loadList);
+          
 
         }, function errorCallback(response,type){
 
           console.log(response);
-          console.log(type)
+          console.log(type);
 
         }
       );
@@ -208,6 +308,22 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
 
 
     this.loadDetail();
+
+
+      $(window).on("orientationchange",function(){
+
+       var h1;
+        var h2=$("#wrapper").height();
+       if(h2<window.innerHeight)
+       {
+        var h3=$("body").height();
+        h1=h3-h2;
+        $("#myFooter").css('margin-top',h1);
+       }
+
+
+
+});
 
 
 

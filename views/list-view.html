@@ -11,6 +11,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+          <a class="navbar-brand" href="#/"><b>Sort and filters</b></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -18,27 +19,27 @@
           <ul class="nav navbar-nav colorWhite">
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Sort</b><span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a ng-click="list.sortList()"><b>A-Z</b></a></li>
-                <li><a ng-click="list.sortReverse()"><b>Z-A</b></a></li>
+              <ul class="dropdown-menu text-center">
+                <li><center><a ng-click="list.sortList()">A-Z</a></center></li>
+                <li><center><a ng-click="list.sortReverse()">Z-A</a></center></li>
               </ul>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right colorWhite">
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Filter by {{list.first_click}}</b><span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a ng-click="list.selected_first(1)"><b>Type</b></a></li>
-                <li><a ng-click="list.selected_first(2)"><b>Name</b></a></li>
+              <ul class="dropdown-menu text-center">
+                <li><center><a ng-click="list.selected_first(1)"><b>Type</b></a></center></li>
+                <li><center><a ng-click="list.selected_first(2)"><b>Name</b></a></center></li>
               </ul>
             </li>
             <li class="dropdown" ng-show="list.id1 == 1">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>{{list.second_click}}</b><span class="caret"></span></a>
-              <ul class="dropdown-menu colorWhite">
-                <li><a ng-click="list.selected_second(0)"><b>None</b></a></li>
-                <li><a ng-click="list.selected_second(1)"><b>Books</b></a></li>
-                <li><a ng-click="list.selected_second(2)"><b>Characters</b></a></li>
-                <li><a ng-click="list.selected_second(3)"><b>Houses</b></a></li>
+              <ul class="dropdown-menu colorWhite text-center">
+                <li><center><a ng-click="list.selected_second(0)"><b>None</b></a></center></li>
+                <li><center><a ng-click="list.selected_second(1)"><b>Books</b></a></center></li>
+                <li><center><a ng-click="list.selected_second(2)"><b>Characters</b></a></center></li>
+                <li><center><a ng-click="list.selected_second(3)"><b>Houses</b></a></center></li>
               </ul>
             </li>
             <li class="dropdown" ng-show="list.id1 == 2">
@@ -60,17 +61,26 @@
       </nav>
     </div>
   </div>
-  <div class="row secondRow">
-    <div class="col-sm-3 col-md-3 col-lg-2 cardStyle" ng-repeat="data in filtered = ( list.loadList | filter : list.filter_item ) | startFrom:list.currentPage*list.pageSize | limitTo:list.pageSize" >
-    <my-card ng-click="list.sendDetail(data.url)"data="data">
-    </my-card>
-  </div>
-  <center><button class="btn btn-primary" ng-disabled="list.currentPage == 0" ng-click="list.currentPage=list.currentPage-1">
+  <div class="row text-center buttons">
+  <div class="spinner text-center" ng-show="list.loading"></div>
+  
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 colorWhite" ng-hide="list.loading">
+  <center><button class="btn btn-primary btn-lg" ng-disabled="list.currentPage == 0" ng-click="list.currentPage=list.currentPage-1">
         Previous
     </button>
+   
     {{list.currentPage+1}}/{{list.numberOfPages(filtered.length)}}
-    <button class="btn btn-primary" ng-disabled="list.currentPage >= filtered.length/list.pageSize - 1" ng-click="list.currentPage=list.currentPage+1">
+    
+    <button class="btn btn-primary btn-lg" ng-disabled="list.currentPage >= filtered.length/list.pageSize - 1" ng-click="list.currentPage=list.currentPage+1">
         Next
     </button>
   </div>
+</div>
+  <div class="row secondRow" ng-hide="list.loading">
+    <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2 cardStyle" ng-repeat="data in filtered = ( list.loadList | filter : list.filter_item ) | startFrom:list.currentPage*list.pageSize | limitTo:list.pageSize" >
+    <my-card ng-click="list.sendDetail(data.url)" data="data">
+    </my-card>
+  </div>
+  </div>
+
 </div>

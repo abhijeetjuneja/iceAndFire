@@ -16,7 +16,7 @@ app.directive('myCard', function() {
             if(scope.data.name!="")
             elem.append("<b>"+scope.data.name+"</b>");
             else {
-              elem.append("<b>Unknown</b>");
+              elem.append("<b>--Unknown--</b>");
             }
             elem.append("<p>By "+scope.data.authors+"</p>");
           }
@@ -27,7 +27,7 @@ app.directive('myCard', function() {
             if(scope.data.name!="")
             elem.append("<b>"+scope.data.name+"</b>");
             else {
-              elem.append("<b>Unknown</b>");
+              elem.append("<b>--Unknown--</b>");
             }
             if(scope.data.aliases[0]!="")
             elem.append('<p>"'+scope.data.aliases[0]+'"</p>');
@@ -38,7 +38,7 @@ app.directive('myCard', function() {
             if(scope.data.name!="")
             elem.append("<b>"+scope.data.name+"</b>");
             else {
-              elem.append("<b>Unknown</b>");
+              elem.append("<b>--Unknown--</b>");
               if(scope.data.region!="")
               elem.append("<b>Region : "+scope.data.region+"</b>");
             }
