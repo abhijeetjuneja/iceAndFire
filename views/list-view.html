@@ -11,7 +11,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#/"><b>Sort and filters</b></a>
+          <a class="navbar-brand"><b>Sort and filters</b></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -20,8 +20,8 @@
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Sort</b><span class="caret"></span></a>
               <ul class="dropdown-menu text-center">
-                <li><center><a ng-click="list.sortList()">A-Z</a></center></li>
-                <li><center><a ng-click="list.sortReverse()">Z-A</a></center></li>
+                <li ng-click="list.sortList()"><center>A-Z</center></li>
+                <li ng-click="list.sortReverse()"><center>Z-A</center></li>
               </ul>
             </li>
           </ul>
@@ -29,17 +29,17 @@
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Filter by {{list.first_click}}</b><span class="caret"></span></a>
               <ul class="dropdown-menu text-center">
-                <li><center><a ng-click="list.selected_first(1)"><b>Type</b></a></center></li>
-                <li><center><a ng-click="list.selected_first(2)"><b>Name</b></a></center></li>
+                <li ng-click="list.selected_first(1)"><center><b>Type</b></center></li>
+                <li  ng-click="list.selected_first(2)"><center><b>Name</b></center></li>
               </ul>
             </li>
             <li class="dropdown" ng-show="list.id1 == 1">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>{{list.second_click}}</b><span class="caret"></span></a>
               <ul class="dropdown-menu colorWhite text-center">
-                <li><center><a ng-click="list.selected_second(0)"><b>None</b></a></center></li>
-                <li><center><a ng-click="list.selected_second(1)"><b>Books</b></a></center></li>
-                <li><center><a ng-click="list.selected_second(2)"><b>Characters</b></a></center></li>
-                <li><center><a ng-click="list.selected_second(3)"><b>Houses</b></a></center></li>
+                <li  ng-click="list.selected_second(0)"><center><b>None</b></center></li>
+                <li  ng-click="list.selected_second(1)"><center><b>Books</b></center></li>
+                <li ng-click="list.selected_second(2)"><center><b>Characters</b></center></li>
+                <li ng-click="list.selected_second(3)"><center><b>Houses</b></center></li>
               </ul>
             </li>
             <li class="dropdown" ng-show="list.id1 == 2">
@@ -53,6 +53,28 @@
                   </div>
                 </form>
                 </li>
+              </ul>
+            </li>
+            <li class="dropdown" ng-show="list.id2 == 2">
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Select Filter</b><span class="caret"></span></a>
+              <ul class="dropdown-menu colorWhite text-center">
+                <li><center><input type="checkbox" name="gender" value="male" id="check1" ng-click="list.selected_third('check1',[229,230,231])"><b>House Lannister</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check2" ng-click="list.selected_third('check2',[378])"><b>House Targaryen</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check3" ng-click="list.selected_third('check3',[170,215,362])"><b>House Stark</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check4" ng-click="list.selected_third('check4',[15,16,17])"><b>House Baratheon</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check5" ng-click="list.selected_third('check5',[34])"><b>House Bolton</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check6" ng-click="list.selected_third('check6',[142,143])"><b>House Frey</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check7" ng-click="list.selected_third('check7',[397,398])"><b>House Tyrell</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check8" ng-click="list.selected_third('check8',0)"><b><b>Appeared on TV</b></center></li>
+              </ul>
+            </li>
+            <li class="dropdown" ng-show="list.id2 == 3">
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>{{list.third_click}}</b><span class="caret"></span></a>
+              <ul class="dropdown-menu colorWhite text-center">
+                <li  ng-click="list.selected_second(0)"><center><b>None</b></center></li>
+                <li  ng-click="list.selected_second(1)"><center><b>Books</b></center></li>
+                <li ng-click="list.selected_second(2)"><center><b>Characters</b></center></li>
+                <li ng-click="list.selected_second(3)"><center><b>Houses</b></center></li>
               </ul>
             </li>
           </ul>
@@ -77,7 +99,7 @@
   </div>
 </div>
   <div class="row secondRow" ng-hide="list.loading">
-    <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2 cardStyle" ng-repeat="data in filtered = ( list.loadList | filter : list.filter_item ) | startFrom:list.currentPage*list.pageSize | limitTo:list.pageSize" >
+    <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2 cardStyle" ng-repeat="data in filtered = ( list.loadList | filter : list.filter_item |  filter : list.houses ) |  startFrom:list.currentPage*list.pageSize | limitTo:list.pageSize" >
     <my-card ng-click="list.sendDetail(data.url)" data="data">
     </my-card>
   </div>

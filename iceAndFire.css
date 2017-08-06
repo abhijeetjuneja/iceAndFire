@@ -52,8 +52,15 @@ html{
   color: black;
   background-image: url('images/listback.jpg');
 }
-.navbar-default .navbar-nav .open .dropdown-menu>li>a{
+.navbar-default .navbar-nav .open .dropdown-menu>li{
   color: black;
+}
+.navbar-default .navbar-nav .open .dropdown-menu>li:hover{
+  background-color: white;
+}
+.dropdown-menu{
+  overflow-y: scroll;
+  height: 100px;
 }
 a{
   color: black;
@@ -61,6 +68,9 @@ a{
 .navbar-collapse li{
   padding-top: 2px;
   padding-bottom: 2px;
+}
+li:hover{
+  cursor: pointer;
 }
 .jumbotron{
   background-color: transparent;
@@ -72,6 +82,9 @@ a{
 }
 .jumbocontainer{
 
+}
+.form-group .btn{
+  margin-top: 15px;
 }
 .navbar{
   filter: drop-shadow(0px 8px 8px white);
@@ -272,8 +285,8 @@ a:hover{
 .spinner{
   border: 8px solid transparent;
   border-radius: 50%;
-  border-top: 8px solid #e9db90;
-  border-bottom: 8px solid #e9db90;
+  border-top: 8px solid white;
+  border-bottom: 8px solid white;
   position: relative;
   margin: auto;
   margin-top: 40vh;
@@ -350,7 +363,7 @@ a:hover{
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .img-responsive{
   height:50vmin;
   width:50vmin;

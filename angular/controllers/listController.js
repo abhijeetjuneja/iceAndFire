@@ -15,6 +15,14 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
     this.pageSize = 10;
     this.data = [];
     this.loading=true;
+    this.value="";
+    this.valarr=[];
+    this.count=0;
+    this.seasarr=[];
+    this.seasval="";
+    this.lann=0;
+    this.tv=0;
+    this.housearray=[];
     this.numberOfPages=function(l){
         return Math.ceil(l/main.pageSize);
     }
@@ -22,6 +30,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
     //Option selector for first filter
     this.selected_first = function(id){
       main.id1=id;
+      main.id2=0;
       if(main.id1==1)
       {
       main.first_click="Type";
@@ -39,13 +48,90 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
     this.selected_second = function(id){
       main.id2=id;
       console.log("Second filter is : "+main.id2);
-      main.filter_items(main.id1,main.id2);
+      main.filter_items();
     }
 
+    this.containsComparator = function(expected, actual){  
+      return actual.indexOf(expected) > -1;
+    };
+
     //Option selector for third filter
-    this.selected_third = function(id){
-      main.id3=id;
-    }
+    this.selected_third = function(id,value){
+      
+      console.log("called");
+      if(document.getElementById(id).checked)
+      {
+        if(value==0)
+        {
+          main.tv=1;
+        }
+        else
+        {
+          for(var i in value)
+          main.housearray.push(value[i]);
+        }
+      }
+      else
+      {
+        if(value==0)
+        {
+          main.tv=0;
+        }
+        else
+        {
+        for(var i in value)
+        {
+          var index = main.housearray.indexOf(value[i]);
+          if (index > -1) {
+            main.housearray.splice(index, 1);
+            }
+
+        }
+        console.log("popped"+main.housearray);
+      }
+      }
+  };
+    
+    this.houses=function(p,index){
+      console.log("called filter");
+        
+        if(p.hasOwnProperty('allegiances'))
+        {
+          if(main.housearray.length!=0)
+          {
+         
+          if(p.allegiances.length!=0)
+          {
+            var str=p.allegiances[0].split("/");
+
+            var k=str[str.length-1];
+            if(main.tv==1)
+            return k && main.housearray.indexOf(parseInt(k)) !== -1 || p.tvSeries[0] !="";
+            else
+              return k && main.housearray.indexOf(parseInt(k)) !== -1 ;
+          }
+          else
+          {
+            if(main.tv==1)
+              return p.tvSeries[0] !="";
+            else
+            return false;
+          }
+          }
+          else
+          {
+            if(main.tv==1)
+              return p.tvSeries[0] !="";
+            else
+            return true;
+          }
+        }
+        else
+          return true;
+      
+      
+
+    };
 
     //Tasker based on second filter
     this.filter_items = function(id){
@@ -53,8 +139,8 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
       {
         main.currentPage = 0;
         main.second_click="Enter Name";
-        main.filter_item="";
-        main.filter_item=$('#filter_entered').val();
+        main.filter_item={};
+        main.filter_item.name=$('#filter_entered').val();
         console.log($('#filter_entered').val());
         console.log(main.filter_item);
       }
@@ -79,6 +165,12 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
         main.second_click="Characters";
         main.filter_item={};
         main.filter_item.gender="";
+
+        if(id=="third")
+         {
+          console.log("called third");
+          main.filter_item.tvSeries=main.seasval;
+         }
         console.log(main.filter_item);
       }
       if(main.id2==3)

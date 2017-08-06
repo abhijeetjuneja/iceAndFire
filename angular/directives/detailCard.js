@@ -24,7 +24,12 @@ app.directive('detailCard', function($timeout) {
             elem.append("<h3><b>Type - "+scope.data.loadList.mediaType+"</b></h3>");
              var d= new Date(scope.data.loadList.released);
             elem.append("<h3><b>Released - "+d.toUTCString()+"</b></h3>");
-            elem.append("<h3><b>Featured Characters - "+scope.data.charSet+"</b></h3>");
+            var loadBooks=function(){
+              if(scope.data.loadList.povCharacters[0]!="")
+              elem.append("<h3><b>Featured Characters - "+scope.data.charSet+"</b></h3>");
+          };
+            setTimeout(loadBooks,1000);
+            
           }
           if(scope.data.loadList.gender!=null)
           {
@@ -59,7 +64,7 @@ app.directive('detailCard', function($timeout) {
               elem.append('<h3><b>Allegiances  - '+scope.data.houseSet+'</b></h3>');
             elem.append("<h3><b>Featured in Books - "+scope.data.bookSet+"</b></h3>");
           }
-            setTimeout(loadBooks,3000);
+            setTimeout(loadBooks,1000);
           }
           
           if(scope.data.loadList.region!=null)
@@ -92,7 +97,7 @@ app.directive('detailCard', function($timeout) {
               if(scope.data.loadList.swornMembers.length!=0)
               elem.append('<h3><b>Sworn Members - '+scope.data.charSet+'</b></h3>');
           }
-            setTimeout(loadBooks,3000);
+            setTimeout(loadBooks,1000);
             
 
           }

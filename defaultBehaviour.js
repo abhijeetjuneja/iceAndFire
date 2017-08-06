@@ -1,22 +1,3 @@
-$(document).ready(function(){
-
-
-  //Smooth scrolling for navbar items and footer
-  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
-
-  if (this.hash !== "") {
-
-    event.preventDefault();
-    var hash = this.hash;
-   
-    $('html, body').animate({
-      scrollTop: $(hash).offset().top
-    }, 900, function(){
-      window.location.hash = hash;
-      });
-    } 
-  });
-});
 
 //Function to allow for smooth scrolling in the web page
 $(window).scroll(function() {
