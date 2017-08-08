@@ -165,12 +165,6 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
         main.second_click="Characters";
         main.filter_item={};
         main.filter_item.gender="";
-
-        if(id=="third")
-         {
-          console.log("called third");
-          main.filter_item.tvSeries=main.seasval;
-         }
         console.log(main.filter_item);
       }
       if(main.id2==3)
@@ -181,7 +175,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
       main.filter_item.region="";
       console.log(main.filter_item);
       }
-    }
+    };
 
     //Sort function
     this.sortList = function(){
