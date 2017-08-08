@@ -25,7 +25,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
     this.housearray=[];
     this.numberOfPages=function(l){
         return Math.ceil(l/main.pageSize);
-    }
+    };
 
     //Option selector for first filter
     this.selected_first = function(id){
@@ -42,14 +42,14 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
       main.first_click="Name";
       main.second_click="None";
     }
-    }
+    };
 
     //Option selector for second filter
     this.selected_second = function(id){
       main.id2=id;
       console.log("Second filter is : "+main.id2);
       main.filter_items();
-    }
+    };
 
     this.containsComparator = function(expected, actual){  
       return actual.indexOf(expected) > -1;
@@ -140,8 +140,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
         main.currentPage = 0;
         main.second_click="Enter Name";
         main.filter_item={};
-        main.filter_item.name=$('#filter_entered').val();
-        console.log($('#filter_entered').val());
+        main.filter_item.name=document.getElementById('filter_entered').value;
         console.log(main.filter_item);
       }
       if(main.id1==1&&main.id2==0)
@@ -189,7 +188,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
           main.currentPage = 0;
         main.loadList.sort(compare);
 
-    }
+    };
 
     //Sort Reverse
     this.sortReverse = function(){
@@ -203,7 +202,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
         console.log("called");
           main.currentPage = 0;
         main.loadList.sort(compare);
-    }
+    };
 
     //Load books from service
     this.loadBooks = function(){
@@ -225,7 +224,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
         }
       );
 
-    }
+    };
 
     //Load characters from service
     this.loadChar = function(i){
@@ -252,7 +251,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
         );
 
 
-    }
+    };
 
 
 
@@ -283,7 +282,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
         );
 
 
-    }
+    };
 
     this.loadBooks();
 
@@ -292,7 +291,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
       IceAndFireService.setUrl(url);
 
       $location.path("/detail");
-    }
+    };
 
 
 
