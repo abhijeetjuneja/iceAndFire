@@ -24,6 +24,8 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
     this.tv=0;
     this.housearray=[];
     this.regionarray=[];
+
+    //Calculate number of page for page filter
     this.numberOfPages=function(l){
         return Math.ceil(l/main.pageSize);
     };
@@ -34,19 +36,18 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
       main.id2=0;
       if(main.id1==1)
       {
-      main.first_click="Type";
+        main.first_click="Type";
       }
       if(main.id1==2)
       {
-      main.first_click="Name";
-      main.second_click="None";
-    }
+        main.first_click="Name";
+        main.second_click="None";
+      }
     };
 
     //Option selector for second filter
     this.selected_second = function(id){
       main.id2=id;
-      console.log("Second filter is : "+main.id2);
       main.filter_items();
     };
 
@@ -56,44 +57,40 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
 
     //Option selector for third filter
     this.selected_third = function(type,id,value){
-      
-      console.log("called");
       if(type==0)
       {
-      if(document.getElementById(id).checked)
-      {
-        if(value==0)
+        if(document.getElementById(id).checked)
         {
-          main.tv=1;
+          if(value==0)
+          {
+            main.tv=1;
+          }
+          else
+          {
+            for(var i in value)
+            main.housearray.push(value[i]);
+          }
         }
         else
         {
-          for(var i in value)
-          main.housearray.push(value[i]);
+          if(value==0)
+          {
+            main.tv=0;
+          }
+          else
+          {
+            for(var i in value)
+            {
+              var index = main.housearray.indexOf(value[i]);
+              if (index > -1) {
+                main.housearray.splice(index, 1);
+                }
+            }
+          }
         }
       }
       else
       {
-        if(value==0)
-        {
-          main.tv=0;
-        }
-        else
-        {
-        for(var i in value)
-        {
-          var index = main.housearray.indexOf(value[i]);
-          if (index > -1) {
-            main.housearray.splice(index, 1);
-            }
-
-        }
-        console.log("popped"+main.housearray);
-      }
-      }
-    }
-    else
-    {
         if(document.getElementById(id).checked)
         {
             for(var i in value)
@@ -108,57 +105,49 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
             if (index > -1) {
               main.regionarray.splice(index, 1);
               }
-
           }
-          console.log("popped"+main.regionarray);
         }
-    }
+      }
   };
     
+    //Select allegiance houses for characters
     this.houses=function(p,index){
-        
         if(p.hasOwnProperty('allegiances'))
         {
           if(main.housearray.length!=0)
-          {
-         
-          if(p.allegiances.length!=0)
-          {
-            var str=p.allegiances[0].split("/");
-
-            var k=str[str.length-1];
-            if(main.tv==1)
-            return k && main.housearray.indexOf(parseInt(k)) !== -1 || p.tvSeries[0] !="";
+          {         
+            if(p.allegiances.length!=0)
+            {
+              var str=p.allegiances[0].split("/");
+              var k=str[str.length-1];
+              if(main.tv==1)
+                return k && main.housearray.indexOf(parseInt(k)) !== -1 || p.tvSeries[0] !="";
+              else
+                return k && main.housearray.indexOf(parseInt(k)) !== -1 ;
+            }
             else
-              return k && main.housearray.indexOf(parseInt(k)) !== -1 ;
+            {
+              if(main.tv==1)
+                return p.tvSeries[0] !="";
+              else
+                return false;
+            }
           }
           else
           {
             if(main.tv==1)
               return p.tvSeries[0] !="";
             else
-            return false;
-          }
-          }
-          else
-          {
-            if(main.tv==1)
-              return p.tvSeries[0] !="";
-            else
-            return true;
+              return true;
           }
         }
         else
-          return true;
-      
-      
-
+          return true;  
     };
 
 
+    //Get region for selected house
     this.region=function(p,index){
-      
-        
         if(p.hasOwnProperty('region'))
         {
           if(main.regionarray.length!=0)
@@ -170,7 +159,6 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
             }
             else
             {
-              console.log("called false");
               return false;
             }
           }
@@ -181,44 +169,34 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
         }
         else
           return true;
-      
-      
-
     };
 
-
+    //Custom Filter function
     this.filter_item=function(item,index){
       if(main.id1==0)
         return true;
       if(main.id1==1&&main.id2==0)
       {
-        console.log("none");
         return true;
       }
       if(main.id1==2)
       {
-
-        console.log("name");
         if(document.getElementById('filter_entered').value=="")
         {
-          console.log("called null true");
           return true;
         }
         else
         if(item.name.toLowerCase().indexOf(document.getElementById('filter_entered').value.toLowerCase())!==-1)
         {
-          console.log("called value true");
           return true;
         }
         else
         {
-          console.log("called value false");
           return false;
         }
       }
       if(main.id1==1&&main.id2==1)
       {
-        console.log("books called");
         if(item.hasOwnProperty('isbn'))
           return true;
         else
@@ -251,26 +229,24 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
       }
       if(main.id1==1&&main.id2==0)
       {
-          main.currentPage = 0;
+        main.currentPage = 0;
         main.second_click="None";
    
       }
       if(main.id1==1&&main.id2==1)
       {
-          main.currentPage = 0;
+        main.currentPage = 0;
         main.second_click="Books";
-
       }
       if(main.id1==1&&main.id2==2)
       {
-          main.currentPage = 0;
+        main.currentPage = 0;
         main.second_click="Characters";
       }
       if(main.id2==3)
       {
         main.currentPage = 0;
         main.second_click="Houses";
-
       }
     };
 
@@ -283,7 +259,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
             return 1;
           return 0;
         }
-          main.currentPage = 0;
+        main.currentPage = 0;
         main.loadList.sort(compare);
 
     };
@@ -297,27 +273,23 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
             return 1;
           return 0;
         }
-        console.log("called");
-          main.currentPage = 0;
+        main.currentPage = 0;
         main.loadList.sort(compare);
     };
 
     //Load books from service
     this.loadBooks = function(){
-
-
       IceAndFireService.getBooks()
         .then(function successCallback(response){
 
           main.loading=true;
           main.loadList=response.data;
-
           main.loadChar(1);
 
         }, function errorCallback(response,type){
 
           console.log(response);
-          console.log(type)
+          console.log(type);
 
         }
       );
@@ -326,18 +298,14 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
 
     //Load characters from service
     this.loadChar = function(i){
-
-
         IceAndFireService.getChar(i,'&pageSize=50')
           .then(function successCallback(response){
-
-
             main.loadList = main.loadList.concat(response.data);
-
             i++;
             if(i<44)
             main.loadChar(i);
-            else {
+            else 
+            {
               main.loadHouse(1);
             }
 
@@ -355,39 +323,32 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
 
     //Load Houses from service
     this.loadHouse = function(i){
-
-
         IceAndFireService.getHouse(i,'&pageSize=50')
           .then(function successCallback(response){
-
-
             main.loadList = main.loadList.concat(response.data);
-
             i++;
             if(i<10)
             main.loadHouse(i);
-            else {
+            else 
+            {
               main.sortList();
-              console.log(main.loadList);
               main.loading=false;
             }
 
           }, function errorCallback(response){
-
             console.log(response);
-
           }
         );
 
 
     };
 
+    //Get list of books,houses and characters
     this.loadBooks();
 
-
+    //Send detail from controller to service and change url
     this.sendDetail=function(url){
       IceAndFireService.setUrl(url);
-
       $location.path("/detail");
     };
 
