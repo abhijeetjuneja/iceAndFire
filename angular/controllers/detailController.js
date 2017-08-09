@@ -52,6 +52,7 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
             main.getCharacters(chars,l);
           }
           else {
+            console.log("called loading");
             main.charSet=main.charList.join();
             console.log(main.charSet); 
             setTimeout(function(){
@@ -292,6 +293,23 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
             main.getCharacters(main.loadList.swornMembers,main.loadList.swornMembers.length);
             if(main.loadList.cadetBranches.length!=0)
             main.getHouses(main.loadList.cadetBranches,main.loadList.cadetBranches.length);
+            if(main.loadList.swornMembers.length==0&&main.loadList.cadetBranches.length==0)
+            {
+              setTimeout(function(){
+              main.loading=false;
+              $(".spinner").css('display','none');
+              $(".detailBook").show();
+                 var h1;
+              var h2=$("#wrapper").height();
+             if(h2<window.innerHeight)
+             {
+              var h3=$("body").height();
+              h1=h3-h2;
+              $("#myFooter").css('margin-top',h1);
+             }
+            },3000);
+           
+            }
           }
           console.log(main.loadList);
           

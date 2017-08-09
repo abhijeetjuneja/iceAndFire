@@ -12,6 +12,7 @@ app.directive('detailCard', function($timeout) {
           {
             elem.parent().addClass("detailBook");
             elem.append("<center><img class='img-responsive' src='images/cover.png'>");
+            elem.append("<br>");
             if(scope.data.loadList.name!="")
             elem.append("<h1><b>"+scope.data.loadList.name+"</b></h2>");
             else {
@@ -35,6 +36,7 @@ app.directive('detailCard', function($timeout) {
           {
             elem.parent().addClass("detailBook");
             elem.append("<center><img class='img-responsive' src='images/char.png'>");
+            elem.append("<br>");
             if(scope.data.loadList.name!="")
             elem.append("<h1><b>"+scope.data.loadList.name+"</b></h2>");
             else {
@@ -71,6 +73,7 @@ app.directive('detailCard', function($timeout) {
           {
             elem.parent().addClass("detailBook");
             elem.append("<center><img class='img-responsive' src='images/house.png'>");
+            elem.append("<br>");
             if(scope.data.loadList.name!="")
             elem.append("<h1><b>"+scope.data.loadList.name+"</b></h1>");
             if(scope.data.loadList.region!="")
@@ -102,7 +105,7 @@ app.directive('detailCard', function($timeout) {
 
           }
         }
-        setTimeout(setHtml,3000);
+        setTimeout(setHtml,1000);
         }
     };
 });
