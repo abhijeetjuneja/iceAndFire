@@ -56,16 +56,28 @@
               </ul>
             </li>
             <li class="dropdown" ng-show="list.id2 == 2">
-              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Select Filter</b><span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Allegiance and TV</b><span class="caret"></span></a>
               <ul class="dropdown-menu colorWhite text-center">
-                <li><center><input type="checkbox" name="gender" value="male" id="check1" ng-click="list.selected_third('check1',[229,230,231])"><b>House Lannister</b></center></li>
-                <li><center><input type="checkbox" name="gender" value="male" id="check2" ng-click="list.selected_third('check2',[378])"><b>House Targaryen</b></center></li>
-                <li><center><input type="checkbox" name="gender" value="male" id="check3" ng-click="list.selected_third('check3',[170,215,362])"><b>House Stark</b></center></li>
-                <li><center><input type="checkbox" name="gender" value="male" id="check4" ng-click="list.selected_third('check4',[15,16,17])"><b>House Baratheon</b></center></li>
-                <li><center><input type="checkbox" name="gender" value="male" id="check5" ng-click="list.selected_third('check5',[34])"><b>House Bolton</b></center></li>
-                <li><center><input type="checkbox" name="gender" value="male" id="check6" ng-click="list.selected_third('check6',[142,143])"><b>House Frey</b></center></li>
-                <li><center><input type="checkbox" name="gender" value="male" id="check7" ng-click="list.selected_third('check7',[397,398])"><b>House Tyrell</b></center></li>
-                <li><center><input type="checkbox" name="gender" value="male" id="check8" ng-click="list.selected_third('check8',0)"><b><b>Appeared on TV</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check1" ng-click="list.selected_third(0,'check1',[229,230,231])"><b>House Lannister</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check2" ng-click="list.selected_third(0,'check2',[378])"><b>House Targaryen</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check3" ng-click="list.selected_third(0,'check3',[170,215,362])"><b>House Stark</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check4" ng-click="list.selected_third(0,'check4',[15,16,17])"><b>House Baratheon</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check5" ng-click="list.selected_third(0,'check5',[34])"><b>House Bolton</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check6" ng-click="list.selected_third(0,'check6',[142,143])"><b>House Frey</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check7" ng-click="list.selected_third(0,'check7',[397,398])"><b>House Tyrell</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check8" ng-click="list.selected_third(0,'check8',0)"><b>Appeared on TV</b></center></li>
+              </ul>
+            </li>
+             <li class="dropdown" ng-show="list.id2 == 3">
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Region</b><span class="caret"></span></a>
+              <ul class="dropdown-menu colorWhite text-center">
+                <li><center><input type="checkbox" name="gender" value="male" id="check9" ng-click="list.selected_third(1,'check9',['The North'])"><b>North</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check10" ng-click="list.selected_third(1,'check10',['The Westerlands'])"><b>Westerlands</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check11" ng-click="list.selected_third(1,'check11',['The Crownlands'])"><b>Crownlands</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check12" ng-click="list.selected_third(1,'check12',['The Riverlands'])"><b>Riverlands</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check13" ng-click="list.selected_third(1,'check13',['Dorne'])"><b>Dorne</b></center></li>
+                <li><center><input type="checkbox" name="gender" value="male" id="check14" ng-click="list.selected_third(1,'check14',['The Vale'])"><b>The Vale</b></center></li>
+                 <li><center><input type="checkbox" name="gender" value="male" id="check15" ng-click="list.selected_third(1,'check15',['The Reach'])"><b>The Reach</b></center></li>
               </ul>
             </li>
           </ul>

@@ -23,6 +23,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
     this.lann=0;
     this.tv=0;
     this.housearray=[];
+    this.regionarray=[];
     this.numberOfPages=function(l){
         return Math.ceil(l/main.pageSize);
     };
@@ -54,9 +55,11 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
     };
 
     //Option selector for third filter
-    this.selected_third = function(id,value){
+    this.selected_third = function(type,id,value){
       
       console.log("called");
+      if(type==0)
+      {
       if(document.getElementById(id).checked)
       {
         if(value==0)
@@ -88,10 +91,31 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
         console.log("popped"+main.housearray);
       }
       }
+    }
+    else
+    {
+        if(document.getElementById(id).checked)
+        {
+            for(var i in value)
+            main.regionarray.push(value[i]);
+          
+        }
+        else
+        {
+          for(var i in value)
+          {
+            var index = main.regionarray.indexOf(value[i]);
+            if (index > -1) {
+              main.regionarray.splice(index, 1);
+              }
+
+          }
+          console.log("popped"+main.regionarray);
+        }
+    }
   };
     
     this.houses=function(p,index){
-      console.log("called filter");
         
         if(p.hasOwnProperty('allegiances'))
         {
@@ -131,8 +155,39 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
 
     };
 
+
+    this.region=function(p,index){
+      
+        
+        if(p.hasOwnProperty('region'))
+        {
+          if(main.regionarray.length!=0)
+          {
+            if(p.region!="")
+            {
+              var k=p.region;
+              return k && main.regionarray.indexOf(k) !== -1 ;
+            }
+            else
+            {
+              console.log("called false");
+              return false;
+            }
+          }
+          else
+          {
+            return true;
+          }
+        }
+        else
+          return true;
+      
+      
+
+    };
+
+
     this.filter_item=function(item,index){
-      console.log(main.id1);
       if(main.id1==0)
         return true;
       if(main.id1==1&&main.id2==0)
@@ -178,7 +233,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
       }
       if(main.id1==1&&main.id2==3)
       {
-        if(item.hasOwnProperty('region'))
+        if(item.hasOwnProperty('region')&&main.region(item,index))
         {
           return true;
         }
