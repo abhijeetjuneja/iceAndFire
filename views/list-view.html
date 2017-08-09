@@ -90,7 +90,7 @@
   </div>
 </div>
   <div class="row secondRow" ng-hide="list.loading">
-    <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2 cardStyle" ng-repeat="data in filtered = ( list.loadList | filter : list.filter_item |  filter : list.houses ) |  startFrom:list.currentPage*list.pageSize | limitTo:list.pageSize" >
+    <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2 cardStyle" ng-repeat="data in filtered = ( list.loadList | filter : list.filter_item ) |  startFrom:list.currentPage*list.pageSize | limitTo:list.pageSize" >
     <my-card ng-click="list.sendDetail(data.url)" data="data">
     </my-card>
   </div>

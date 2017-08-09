@@ -34,11 +34,9 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
       if(main.id1==1)
       {
       main.first_click="Type";
-      main.filter_item="";
       }
       if(main.id1==2)
       {
-        main.filter_item="";
       main.first_click="Name";
       main.second_click="None";
     }
@@ -133,46 +131,91 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
 
     };
 
+    this.filter_item=function(item,index){
+      console.log(main.id1);
+      if(main.id1==0)
+        return true;
+      if(main.id1==1&&main.id2==0)
+      {
+        console.log("none");
+        return true;
+      }
+      if(main.id1==2)
+      {
+
+        console.log("name");
+        if(document.getElementById('filter_entered').value=="")
+        {
+          console.log("called null true");
+          return true;
+        }
+        else
+        if(item.name.toLowerCase().indexOf(document.getElementById('filter_entered').value.toLowerCase())!==-1)
+        {
+          console.log("called value true");
+          return true;
+        }
+        else
+        {
+          console.log("called value false");
+          return false;
+        }
+      }
+      if(main.id1==1&&main.id2==1)
+      {
+        console.log("books called");
+        if(item.hasOwnProperty('isbn'))
+          return true;
+        else
+          return false;
+      }
+      if(main.id1==1&&main.id2==2)
+      {
+        if(item.hasOwnProperty('gender')&&main.houses(item,index))
+          return true;
+        else
+          return false;
+      }
+      if(main.id1==1&&main.id2==3)
+      {
+        if(item.hasOwnProperty('region'))
+        {
+          return true;
+        }
+        else
+          return false;
+      }
+    };
+
     //Tasker based on second filter
     this.filter_items = function(id){
       if(main.id1==2)
       {
         main.currentPage = 0;
         main.second_click="Enter Name";
-        main.filter_item={};
-        main.filter_item.name=document.getElementById('filter_entered').value;
-        console.log(main.filter_item);
       }
       if(main.id1==1&&main.id2==0)
       {
           main.currentPage = 0;
         main.second_click="None";
-        main.filter_item={};
-        console.log(main.filter_item);
+   
       }
       if(main.id1==1&&main.id2==1)
       {
           main.currentPage = 0;
         main.second_click="Books";
-        main.filter_item={};
-        main.filter_item.isbn="";
-        console.log(main.filter_item);
+
       }
       if(main.id1==1&&main.id2==2)
       {
           main.currentPage = 0;
         main.second_click="Characters";
-        main.filter_item={};
-        main.filter_item.gender="";
-        console.log(main.filter_item);
       }
       if(main.id2==3)
       {
         main.currentPage = 0;
         main.second_click="Houses";
-        main.filter_item={};
-      main.filter_item.region="";
-      console.log(main.filter_item);
+
       }
     };
 
