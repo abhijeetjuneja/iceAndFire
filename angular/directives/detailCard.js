@@ -29,7 +29,7 @@ app.directive('detailCard', function($timeout) {
               if(scope.data.loadList.povCharacters[0]!="")
               elem.append("<h3><b>Featured Characters - "+scope.data.charSet+"</b></h3>");
           };
-            setTimeout(loadBooks,1000);
+            setTimeout(loadBooks,3000);
             
           }
           if(scope.data.loadList.gender!=null)
@@ -100,7 +100,7 @@ app.directive('detailCard', function($timeout) {
               if(scope.data.loadList.swornMembers.length!=0)
               elem.append('<h3><b>Sworn Members - '+scope.data.charSet+'</b></h3>');
           }
-            setTimeout(loadBooks,1000);
+            setTimeout(loadBooks,2000);
             
 
           }
