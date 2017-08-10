@@ -57,6 +57,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
 
     //Option selector for third filter
     this.selected_third = function(type,id,value){
+      main.currentPage = 0;
       if(type==0)
       {
         if(document.getElementById(id).checked)

@@ -1,6 +1,6 @@
 //Declare the controller
 
-app.controller('detailController',['$http','IceAndFireService',function($http,IceAndFireService){
+app.controller('detailController',['$http','IceAndFireService','$scope',function($http,IceAndFireService,$scope){
 
     var main=this;
     this.bcount=0;
@@ -16,7 +16,15 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
     this.houseIndex=0;
     this.houseSet="";
     this.houseList=[];
-    this.loading=true;
+    this.housewatch=0;
+    this.bookwatch=0;
+    this.charwatch=0;
+    this.charcode=0;
+    this.housecode=0;
+    this.signalchar=0;
+    this.loading1=true;
+    $scope.loading=true;
+
 
     //Back button
     this.goBack =function() {
@@ -48,20 +56,71 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
             }
             else 
             {
+              //Join all characters in a single string
+              main.charIndex=0;
               main.charSet=main.charList.join();
-              setTimeout(function(){
-                main.loading=false;
-                $(".spinner").css('display','none');
-                $(".detailBook").show();
+              if(main.housewatch==1&&main.loadList.swornMembers.length!=0)
+              {
+                setTimeout(function(){
+                $scope.$apply(function() {
+                  $scope.loading=false;
+                 setTimeout(function(){
+                  $(".spinner").css('display','none');
+                  $(".detailBook").show();
                   var h1;
-                var h2=$("#wrapper").height();
-                if(h2<window.innerHeight)
-                {
-                  var h3=$("body").height();
-                  h1=h3-h2;
-                  $("#myFooter").css('margin-top',h1);
-                }
-              },3000);
+                  var h2=$("#wrapper").height();
+                  if(h2<window.innerHeight)
+                  {
+                    var h3=$("body").height();
+                    h1=h3-h2;
+                    $("#myFooter").css('margin-top',h1);
+                  }
+                  },1000);
+                  });
+                },1000);
+              }
+              if(main.bookwatch==1)
+              {
+                setTimeout(function(){
+                $scope.$apply(function() {
+                  main.loading1=false;
+                  $scope.loading=false;
+                 setTimeout(function(){
+                  $(".spinner").css('display','none');
+                  $(".detailBook").show();
+                  var h1;
+                  var h2=$("#wrapper").height();
+                  if(h2<window.innerHeight)
+                  {
+                    var h3=$("body").height();
+                    h1=h3-h2;
+                    $("#myFooter").css('margin-top',h1);
+                  }
+                  },1000);
+                  });
+                },1000);
+               
+              }
+              if(main.housewatch==1&&main.loadList.swornMembers.length!=0)
+              {
+                setTimeout(function(){
+                $scope.$apply(function() {
+                  $scope.loading=false;
+                  setTimeout(function(){
+                  $(".spinner").css('display','none');
+                  $(".detailBook").show();
+                    var h1;
+                  var h2=$("#wrapper").height();
+                  if(h2<window.innerHeight)
+                  {
+                    var h3=$("body").height();
+                    h1=h3-h2;
+                    $("#myFooter").css('margin-top',h1);
+                  }
+                  },1000);
+                  });
+                },1000);
+              }
              
             }
           }, function errorCallback(response,type){
@@ -75,19 +134,68 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
             }
             else 
             {
-              setTimeout(function(){
-              main.loading=false;
-              $(".spinner").css('display','none');
-              $(".detailBook").show();
-              var h1;
-              var h2=$("#wrapper").height();
-              if(h2<window.innerHeight)
+              main.charIndex=0;
+              if(main.housewatch==1&&main.loadList.swornMembers.length!=0)
               {
-                var h3=$("body").height();
-                h1=h3-h2;
-                $("#myFooter").css('margin-top',h1);
+                setTimeout(function(){
+                  $scope.$apply(function() {
+                    $scope.loading=false;
+                    setTimeout(function(){
+                    $(".spinner").css('display','none');
+                    $(".detailBook").show();
+                    var h1;
+                    var h2=$("#wrapper").height();
+                    if(h2<window.innerHeight)
+                    {
+                      var h3=$("body").height();
+                      h1=h3-h2;
+                      $("#myFooter").css('margin-top',h1);
+                    }
+                    },1000);
+                    });
+                },1000);
               }
-            },3000);
+              if(main.bookwatch==1)
+              {
+               setTimeout(function(){
+                  $scope.$apply(function() {
+                    $scope.loading=false;
+                    setTimeout(function(){
+                    $(".spinner").css('display','none');
+                    $(".detailBook").show();
+                    var h1;
+                    var h2=$("#wrapper").height();
+                    if(h2<window.innerHeight)
+                    {
+                      var h3=$("body").height();
+                      h1=h3-h2;
+                      $("#myFooter").css('margin-top',h1);
+                    }
+                    },1000);
+                    });
+                },1000);
+              }
+              if(main.housewatch==1&&main.loadList.swornMembers.length!=0)
+              {
+                setTimeout(function(){
+                  $scope.$apply(function() {
+                    $scope.loading=false;
+                    setTimeout(function(){
+                    $(".spinner").css('display','none');
+                    $(".detailBook").show();
+                    var h1;
+                    var h2=$("#wrapper").height();
+                    if(h2<window.innerHeight)
+                    {
+                      var h3=$("body").height();
+                      h1=h3-h2;
+                      $("#myFooter").css('margin-top',h1);
+                    }
+                    },1000);
+                  });
+                },1000);
+              }
+             
             }
           }
           );
@@ -115,19 +223,27 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
           {
             main.bookSet=main.bookList.join();
             main.bookIndex=0;
-            setTimeout(function(){
-              main.loading=false;
-              $(".spinner").css('display','none');
-              $(".detailBook").show();
-                 var h1;
-              var h2=$("#wrapper").height();
-              if(h2<window.innerHeight)
+              if(main.charwatch==1&&main.charcode==0&&(main.loadList.books.length!=0||main.loadList.povBooks.length!=0))
               {
-                var h3=$("body").height();
-                h1=h3-h2;
-                $("#myFooter").css('margin-top',h1);
+                setTimeout(function(){
+                  $scope.$apply(function() {
+                    $scope.loading=false;
+                    setTimeout(function(){
+                    $(".spinner").css('display','none');
+                    $(".detailBook").show();
+                    var h1;
+                    var h2=$("#wrapper").height();
+                    if(h2<window.innerHeight)
+                    {
+                      var h3=$("body").height();
+                      h1=h3-h2;
+                      $("#myFooter").css('margin-top',h1);
+                    }
+                    },1000);
+                    });
+                },1000);
               }
-            },3000);    
+            
           }
           }, function errorCallback(response,type){
             console.log(baseUrl);
@@ -140,19 +256,28 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
             }
             else 
             {
-              setTimeout(function(){
-              main.loading=false;
-              $(".spinner").css('display','none');
-              $(".detailBook").show();
-              var h1;
-              var h2=$("#wrapper").height();
-              if(h2<window.innerHeight)
+              main.bookIndex=0;
+              if(main.charwatch==1&&(main.loadList.books.length!=0||main.loadList.povBooks.length!=0))
               {
-                var h3=$("body").height();
-                h1=h3-h2;
-                $("#myFooter").css('margin-top',h1);
+                setTimeout(function(){
+                  $scope.$apply(function() {
+                    $scope.loading=false;
+                    setTimeout(function(){
+                    $(".spinner").css('display','none');
+                    $(".detailBook").show();
+                    var h1;
+                    var h2=$("#wrapper").height();
+                    if(h2<window.innerHeight)
+                    {
+                      var h3=$("body").height();
+                      h1=h3-h2;
+                      $("#myFooter").css('margin-top',h1);
+                    }
+                    },1000);
+                    });
+                },1000);
               }
-            },3000);
+            
             }
           }
           );
@@ -181,19 +306,46 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
           {
             main.houseSet=main.houseList.join();
             main.houseIndex=0;
-            setTimeout(function(){
-              main.loading=false;
-              $(".spinner").css('display','none');
-              $(".detailBook").show();
-              var h1;
-              var h2=$("#wrapper").height();
-              if(h2<window.innerHeight)
-              {
-                var h3=$("body").height();
-                h1=h3-h2;
-                $("#myFooter").css('margin-top',h1);
-              }
-            },3000);  
+            if(main.housewatch==1&&main.loadList.cadetBranches.length!=0&&main.housecode==0)
+            {
+               setTimeout(function(){
+                  $scope.$apply(function() {
+                    $scope.loading=false;
+                    setTimeout(function(){
+                    $(".spinner").css('display','none');
+                    $(".detailBook").show();
+                    var h1;
+                    var h2=$("#wrapper").height();
+                    if(h2<window.innerHeight)
+                    {
+                      var h3=$("body").height();
+                      h1=h3-h2;
+                      $("#myFooter").css('margin-top',h1);
+                    }
+                    },1000);
+                    });
+                },1000);
+            }
+            if(main.charwatch==1&&main.loadList.allegiances.length!=0)
+            {
+              setTimeout(function(){
+                  $scope.$apply(function() {
+                    $scope.loading=false;
+                    setTimeout(function(){
+                    $(".spinner").css('display','none');
+                    $(".detailBook").show();
+                    var h1;
+                    var h2=$("#wrapper").height();
+                    if(h2<window.innerHeight)
+                    {
+                      var h3=$("body").height();
+                      h1=h3-h2;
+                      $("#myFooter").css('margin-top',h1);
+                    }
+                    },1000);
+                    });
+                },1000);
+            }
           }
           }, function errorCallback(response,type){
             console.log(baseUrl);
@@ -206,19 +358,47 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
             }
             else 
             {
-              setTimeout(function(){
-              main.loading=false;
-              $(".spinner").css('display','none');
-              $(".detailBook").show();
-              var h1;
-              var h2=$("#wrapper").height();
-              if(h2<window.innerHeight)
+              main.houseIndex=0;
+              if(main.housewatch==1&&main.loadList.cadetBranches.length!=0)
               {
-                var h3=$("body").height();
-                h1=h3-h2;
-                $("#myFooter").css('margin-top',h1);
+                 setTimeout(function(){
+                  $scope.$apply(function() {
+                    $scope.loading=false;
+                    setTimeout(function(){
+                    $(".spinner").css('display','none');
+                    $(".detailBook").show();
+                    var h1;
+                    var h2=$("#wrapper").height();
+                    if(h2<window.innerHeight)
+                    {
+                      var h3=$("body").height();
+                      h1=h3-h2;
+                      $("#myFooter").css('margin-top',h1);
+                    }
+                    },1000);
+                    });
+                },1000);
               }
-            },3000);
+              if(main.charwatch==1&&main.loadList.allegiances.length!=0)
+              {
+                setTimeout(function(){
+                  $scope.$apply(function() {
+                    $scope.loading=false;
+                    setTimeout(function(){
+                    $(".spinner").css('display','none');
+                    $(".detailBook").show();
+                    var h1;
+                    var h2=$("#wrapper").height();
+                    if(h2<window.innerHeight)
+                    {
+                      var h3=$("body").height();
+                      h1=h3-h2;
+                      $("#myFooter").css('margin-top',h1);
+                    }
+                    },1000);
+                    });
+                },1000);
+              }
             }
           }
           );
@@ -235,10 +415,12 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
           if(main.loadList.hasOwnProperty('povCharacters'))
           {
             main.getCharacters(main.loadList.povCharacters,main.loadList.povCharacters.length);
+            main.bookwatch=1;
           }
           else
             if(main.loadList.hasOwnProperty('books'))
             {
+              main.charwatch=1;
               if(main.loadList.books.length!=0)
               {
                 main.getBooks(main.loadList.books,main.loadList.books.length);
@@ -248,29 +430,59 @@ app.controller('detailController',['$http','IceAndFireService',function($http,Ic
               if(main.loadList.allegiances.length!=0)
               {
                 main.getHouses(main.loadList.allegiances,main.loadList.allegiances.length);
+                main.charcode=1;
+              }
+              if(main.loadList.books.length==0&&main.loadList.povBooks.length==0&&main.loadList.allegiances.length==0)
+              {
+                setTimeout(function(){
+                  $scope.$apply(function() {
+                    $scope.loading=false;
+                    setTimeout(function(){
+                    $(".spinner").css('display','none');
+                    $(".detailBook").show();
+                    var h1;
+                    var h2=$("#wrapper").height();
+                    if(h2<window.innerHeight)
+                    {
+                      var h3=$("body").height();
+                      h1=h3-h2;
+                      $("#myFooter").css('margin-top',h1);
+                    }
+                    },1000);
+                    });
+                },1000);
               }
             } 
           if(main.loadList.hasOwnProperty('region'))
           {
-            if(main.loadList.swornMembers.length!=0)
-              main.getCharacters(main.loadList.swornMembers,main.loadList.swornMembers.length);
+            main.housewatch=1;
+            
             if(main.loadList.cadetBranches.length!=0)
               main.getHouses(main.loadList.cadetBranches,main.loadList.cadetBranches.length);
+            if(main.loadList.swornMembers.length!=0)
+            {
+              main.housecode=1;
+              main.getCharacters(main.loadList.swornMembers,main.loadList.swornMembers.length);
+            }
             if(main.loadList.swornMembers.length==0&&main.loadList.cadetBranches.length==0)
             {
-              setTimeout(function(){
-              main.loading=false;
-              $(".spinner").css('display','none');
-              $(".detailBook").show();
-              var h1;
-              var h2=$("#wrapper").height();
-              if(h2<window.innerHeight)
-              {
-                var h3=$("body").height();
-                h1=h3-h2;
-                $("#myFooter").css('margin-top',h1);
-              }
-            },3000);
+               setTimeout(function(){
+                $scope.$apply(function() {
+                  $scope.loading=false;
+                  setTimeout(function(){
+                  $(".spinner").css('display','none');
+                  $(".detailBook").show();
+                  var h1;
+                  var h2=$("#wrapper").height();
+                  if(h2<window.innerHeight)
+                  {
+                    var h3=$("body").height();
+                    h1=h3-h2;
+                    $("#myFooter").css('margin-top',h1);
+                  }
+                  },1000);
+                  });
+                },1000);
             }
           }
         }, function errorCallback(response,type){
