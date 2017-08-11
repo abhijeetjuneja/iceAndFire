@@ -23,6 +23,7 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
     this.housecode=0;
     this.signalchar=0;
     this.loading1=true;
+    this.charbcount=0;
     $scope.loading=true;
 
 
@@ -221,9 +222,10 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
           }
           else 
           {
+            main.charbcount++;
             main.bookSet=main.bookList.join();
             main.bookIndex=0;
-              if(main.charwatch==1&&main.charcode==0&&(main.loadList.books.length!=0||main.loadList.povBooks.length!=0))
+              if(main.charwatch==1&&main.charcode==0&&main.charbcount==2&&(main.loadList.books.length!=0||main.loadList.povBooks.length!=0))
               {
                 setTimeout(function(){
                   $scope.$apply(function() {
@@ -326,7 +328,7 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
                     });
                 },1000);
             }
-            if(main.charwatch==1&&main.loadList.allegiances.length!=0)
+            if(main.charwatch==1&&main.loadList.allegiances.length!=0&&main.charcode==1)
             {
               setTimeout(function(){
                   $scope.$apply(function() {
@@ -425,11 +427,16 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
               {
                 main.getBooks(main.loadList.books,main.loadList.books.length);
               }
+              else
+                main.charbcount++;
               if(main.loadList.povBooks.length!=0)
                 main.getBooks(main.loadList.povBooks,main.loadList.povBooks.length);
+              else
+                main.charbcount++;
               if(main.loadList.allegiances.length!=0)
               {
                 main.getHouses(main.loadList.allegiances,main.loadList.allegiances.length);
+                if(((main.loadList.books.length+main.loadList.povBooks.length)-main.loadList.allegiances.length)<2)
                 main.charcode=1;
               }
               if(main.loadList.books.length==0&&main.loadList.povBooks.length==0&&main.loadList.allegiances.length==0)
