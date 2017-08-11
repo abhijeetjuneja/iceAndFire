@@ -90,6 +90,10 @@ li:hover{
 .jumbotron{
   background-color: transparent;
   color:white;
+  -webkit-filter: drop-shadow(0px 8px 8px white);
+  -ms-filter: drop-shadow(0px 8px 8px white);
+  -o-filter: drop-shadow(0px 8px 8px white);
+  -moz-filter: drop-shadow(0px 8px 8px white);
   filter: drop-shadow(0px 8px 8px white);
   margin-bottom: 0;
   padding-bottom: 40vh;
@@ -103,6 +107,10 @@ li:hover{
 }
 .navbar{
   filter: drop-shadow(0px 8px 8px white);
+   -webkit-filter: drop-shadow(0px 8px 8px white);
+  -ms-filter: drop-shadow(0px 8px 8px white);
+  -o-filter: drop-shadow(0px 8px 8px white);
+  -moz-filter: drop-shadow(0px 8px 8px white);
   background-image: url('images/navback.jpg');
 }
 .navbar-nav{
@@ -141,6 +149,10 @@ a:hover{
 
 #myFooter {
   filter: drop-shadow(16px 0px 16px white);
+   -webkit-filter: drop-shadow(16px 0px 16px white);
+  -ms-filter: drop-shadow(16px 0px 16px white);
+  -o-filter: drop-shadow(16px 0px 16px white);
+  -moz-filter: drop-shadow(16px 0px 16px white);
     background-image: url('images/navback.jpg');
     color: black;
     width:100%;
@@ -197,6 +209,10 @@ a:hover{
 
 .btn{
   background-color:white ;
+   -webkit-filter: drop-shadow(0px 4px 4px white);
+  -ms-filter: drop-shadow(0px 4px 4px white);
+  -o-filter: drop-shadow(0px 4px 4px white);
+  -moz-filter: drop-shadow(0px 4px 4px white);
   filter: drop-shadow(0px 4px 4px white);
   color: black;
   margin:auto;
@@ -206,6 +222,10 @@ a:hover{
 .btn:hover,.btn:focus,.btn:active.focus,.btn:active:focus{
   background-color: white!important;
   color: black;
+   -webkit-filter: drop-shadow(0px 16px 16px white);
+  -ms-filter: drop-shadow(0px 16px 16px white);
+  -o-filter: drop-shadow(0px 16px 16px white);
+  -moz-filter: drop-shadow(0px 16px 16px white);
   filter: drop-shadow(0px 16px 16px white);
 }
 .secondRow{
@@ -214,6 +234,10 @@ a:hover{
 .img-responsive{
   height:30vh;
   width:30vh;
+  -webkit-filter: drop-shadow(0px 16px 16px white);
+  -ms-filter: drop-shadow(0px 16px 16px white);
+  -o-filter: drop-shadow(0px 16px 16px white);
+  -moz-filter: drop-shadow(0px 16px 16px white);
   filter: drop-shadow(0px 16px 16px white);
 }
 
@@ -235,6 +259,10 @@ a:hover{
   margin-bottom: 5vh;
 }
 .characterStyle:hover,.bookStyle:hover,.houseStyle:hover{
+  -webkit-filter: drop-shadow(0px 16px 16px white);
+  -ms-filter: drop-shadow(0px 16px 16px white);
+  -o-filter: drop-shadow(0px 16px 16px white);
+  -moz-filter: drop-shadow(0px 16px 16px white);
   filter: drop-shadow(0px 16px 16px white);
   cursor:pointer;
 }
@@ -283,6 +311,10 @@ a:hover{
   margin-right: 16.665%;
   padding: auto;
   color:white;
+  -webkit-filter: drop-shadow(0px 8px 8px white);
+  -ms-filter: drop-shadow(0px 8px 8px white);
+  -o-filter: drop-shadow(0px 8px 8px white);
+  -moz-filter: drop-shadow(0px 8px 8px white);
   filter: drop-shadow(0px 8px 8px white);
   background-position: center;
   background-size: cover;
@@ -307,7 +339,10 @@ a:hover{
   margin: auto;
   margin-top: 40vh;
   margin-bottom: 40vh;
-
+  -webkit-filter: drop-shadow(0px 4px 4px white);
+  -ms-filter: drop-shadow(0px 4px 4px white);
+  -o-filter: drop-shadow(0px 4px 4px white);
+  -moz-filter: drop-shadow(0px 4px 4px white);
   filter: drop-shadow(0px 4px 4px white);
   width: 5vmax;
   height: 5vmax;
