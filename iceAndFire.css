@@ -16,6 +16,9 @@ body{
 html{
   height: 100%; 
 }
+
+
+
 #wrapper {
   min-height:100%;
   position:relative;
@@ -414,6 +417,91 @@ a:hover{
   .innerChar p{
     font-size: 2.8vmin;
   }
+}
+
+
+/* Animations */
+
+
+.characterStyle.ng-enter,
+.characterStyle.ng-leave,
+.bookStyle.ng-enter,
+.bookStyle.ng-leave,
+.houseStyle.ng-enter,
+.houseStyle.ng-leave,
+.spinner.ng-enter,
+.spinner.ng-leave,
+.detailBook.ng-enter,
+.detailBook.ng-leave,
+.main.ng-enter,
+.main.ng-leave {
+    -webkit-transition: all 2s ease;
+    -ms-transition: all 2s ease;
+    -o-transition: all 2s ease;
+    -moz-transition: all 2s ease;
+    transition: all 2s ease;
+}
+.main.ng-enter,.characterStyle.ng-enter,.bookStyle.ng-enter,.houseStyle.ng-enter,.spinner.ng-enter,.detailBook.ng-enter{
+    opacity: 0;
+}
+.main.ng-enter-stagger,.characterStyle.ng-enter-stagger,.bookStyle.ng-enter-stagger,.houseStyle.ng-enter-stagger,.spinner.ng-enter-stagger,.detailBook.ng-enter-stagger{
+    -webkit-transition-delay: 0.1s;
+    -ms-transition-delay: 0.1s;
+    -o-transition-delay: 0.1s;
+    -moz-transition-delay: 0.1s;
+    transition-delay: 0.1s;
+}
+.main.ng-enter-active,.characterStyle.ng-enter-active,.bookStyle.ng-enter-active,.houseStyle.ng-enter-active,
+.spinner.ng-enter-active,.detailBook.ng-enter-active{
+    opacity: 1;
+}
+.main.ng-leave,.characterStyle.ng-leave,.bookStyle.ng-leave,.houseStyle.ng-leave,.spinner.ng-leave,.detailBook.ng-leave{
+    opacity: 1;
+}
+.main.ng-leave-active,.characterStyle.ng-leave-active,.bookStyle.ng-leave-active,.houseStyle.ng-leave-active,
+.spinner.ng-leave-active,.detailBook.ng-leave-active {
+    opacity: 0;
+}
+
+
+.open > .dropdown-menu {
+  -webkit-transform: scale(1, 1);
+  transform: scale(1, 1);  
+  opacity:1;
+}
+  
+.dropdown-menu {
+  opacity:.3;
+  -webkit-transform-origin: top;
+  -ms-transform-origin: top;
+  -o-transform-origin: top;
+  -moz-transform-origin: top;
+  transform-origin: top;
+  -webkit-animation-fill-mode: forwards;  
+  -ms-animation-fill-mode: forwards;
+  -o-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards; 
+  -ms-transform: scale(1, 0);
+  -webkit-transform: scale(1, 0);
+  -o-transform: scale(1, 0);
+  -moz-transform: scale(1, 0);
+ transform: scale(1, 0);
+  display: block; 
+  transition: all 0.5s linear;
+  -webkit-transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  -ms-transition: all 0.5s linear;
+}
+
+.collapsing {
+    -ms-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+    display: block;
 }
 
 
