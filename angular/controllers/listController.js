@@ -1,6 +1,6 @@
 //Declare the controller
 
-app.controller('listController',['$http','IceAndFireService','$location',function($http,IceAndFireService,$location){
+app.controller('listController',['$http','IceAndFireService','$location','$scope',function($http,IceAndFireService,$location,$scope){
 
     var main=this;
 
@@ -24,6 +24,7 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
     this.tv=0;
     this.housearray=[];
     this.regionarray=[];
+    $scope.inputVal="";
 
     //Calculate number of page for page filter
     this.numberOfPages=function(l){
@@ -182,19 +183,16 @@ app.controller('listController',['$http','IceAndFireService','$location',functio
       }
       if(main.id1==2)
       {
-        if(document.getElementById('filter_entered').value=="")
-        {
-          return true;
-        }
-        else
-        if(item.name.toLowerCase().indexOf(document.getElementById('filter_entered').value.toLowerCase())!==-1)
-        {
-          return true;
-        }
-        else
-        {
-          return false;
-        }
+            if ($scope.inputVal=="") {
+                return true;
+            }
+            else
+              if(item.name.toLowerCase().indexOf($scope.inputVal.toLowerCase())!==-1)
+              {
+                return true;
+              }
+              else
+                return false;
       }
       if(main.id1==1&&main.id2==1)
       {
