@@ -300,7 +300,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
           main.loadChar(1);
 
         }, function errorCallback(response,type){
-
+          alert("some error occurred. Check the console.");
           console.log(response);
           console.log(type);
 

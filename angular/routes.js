@@ -23,7 +23,7 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider,$locat
         .otherwise(
             {
                 //redirectTo:'/'
-                template   : '<h1>404 page not found</h1>'
+                templateUrl   : 'views/error.html'
             }
         );
         $locationProvider.html5Mode({
