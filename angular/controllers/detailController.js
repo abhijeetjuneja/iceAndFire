@@ -3,9 +3,6 @@
 app.controller('detailController',['$http','IceAndFireService','$scope',function($http,IceAndFireService,$scope){
 
     var main=this;
-    this.bcount=0;
-    this.ccount=0;
-    this.hcount=0;
     this.loadList={};
     this.charList=[];
     this.charSet="";
@@ -21,7 +18,6 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
     this.charwatch=0;
     this.charcode=0;
     this.housecode=0;
-    this.signalchar=0;
     this.loading1=true;
     this.charbcount=0;
     $scope.loading=true;
@@ -60,6 +56,7 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
               //Join all characters in a single string
               main.charIndex=0;
               main.charSet=main.charList.join();
+              //Set watch for swornmembers if it has elements
               if(main.housewatch==1&&main.loadList.swornMembers.length!=0)
               {
                 setTimeout(function(){
@@ -80,6 +77,7 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
                   });
                 },1000);
               }
+              //Set watch for books
               if(main.bookwatch==1)
               {
                 setTimeout(function(){
@@ -136,6 +134,7 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
             else 
             {
               main.charIndex=0;
+              //Set watch for swornmembers if it has elements
               if(main.housewatch==1&&main.loadList.swornMembers.length!=0)
               {
                 setTimeout(function(){
@@ -156,6 +155,7 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
                     });
                 },1000);
               }
+              //Set watch for books
               if(main.bookwatch==1)
               {
                setTimeout(function(){
@@ -174,26 +174,6 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
                     }
                     },1000);
                     });
-                },1000);
-              }
-              if(main.housewatch==1&&main.loadList.swornMembers.length!=0)
-              {
-                setTimeout(function(){
-                  $scope.$apply(function() {
-                    $scope.loading=false;
-                    setTimeout(function(){
-                    $(".spinner").css('display','none');
-                    $(".detailBook").show();
-                    var h1;
-                    var h2=$("#wrapper").height();
-                    if(h2<window.innerHeight)
-                    {
-                      var h3=$("body").height();
-                      h1=h3-h2;
-                      $("#myFooter").css('margin-top',h1);
-                    }
-                    },1000);
-                  });
                 },1000);
               }
              
@@ -225,6 +205,7 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
             main.charbcount++;
             main.bookSet=main.bookList.join();
             main.bookIndex=0;
+            //Set watch for books character appeared in
               if(main.charwatch==1&&main.charcode==0&&main.charbcount==2&&(main.loadList.books.length!=0||main.loadList.povBooks.length!=0))
               {
                 setTimeout(function(){
@@ -259,6 +240,7 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
             else 
             {
               main.bookIndex=0;
+              //Set watch for characters appeared in
               if(main.charwatch==1&&(main.loadList.books.length!=0||main.loadList.povBooks.length!=0))
               {
                 setTimeout(function(){
@@ -308,6 +290,7 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
           {
             main.houseSet=main.houseList.join();
             main.houseIndex=0;
+            //Set watch for cadetBranches if it has elements more than sworn members
             if(main.housewatch==1&&main.loadList.cadetBranches.length!=0&&main.housecode==0)
             {
                setTimeout(function(){
@@ -328,6 +311,7 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
                     });
                 },1000);
             }
+            //Set watch for allegiances of a character
             if(main.charwatch==1&&main.loadList.allegiances.length!=0&&main.charcode==1)
             {
               setTimeout(function(){
@@ -361,7 +345,8 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
             else 
             {
               main.houseIndex=0;
-              if(main.housewatch==1&&main.loadList.cadetBranches.length!=0)
+               //Set watch for cadetBranches if it has elements more than sworn members
+              if(main.housewatch==1&&main.loadList.cadetBranches.length!=0&&main.housecode==0)
               {
                  setTimeout(function(){
                   $scope.$apply(function() {
@@ -381,7 +366,8 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
                     });
                 },1000);
               }
-              if(main.charwatch==1&&main.loadList.allegiances.length!=0)
+              //Set watch for allegiances of a character
+              if(main.charwatch==1&&main.loadList.allegiances.length!=0&&main.charcode==1)
               {
                 setTimeout(function(){
                   $scope.$apply(function() {
@@ -414,6 +400,7 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
         .then(function successCallback(response){
           main.loadList=response.data;
           main.loading=true;
+          //Get all characters
           if(main.loadList.hasOwnProperty('povCharacters'))
           {
             main.getCharacters(main.loadList.povCharacters,main.loadList.povCharacters.length);
@@ -433,6 +420,7 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
                 main.getBooks(main.loadList.povBooks,main.loadList.povBooks.length);
               else
                 main.charbcount++;
+              //Set watch for allegiances only if it has more elements than books and povBooks combined
               if(main.loadList.allegiances.length!=0)
               {
                 main.getHouses(main.loadList.allegiances,main.loadList.allegiances.length);
@@ -460,17 +448,20 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
                 },1000);
               }
             } 
+          //Get Cadetbranches and sworn members
           if(main.loadList.hasOwnProperty('region'))
           {
             main.housewatch=1;
             
             if(main.loadList.cadetBranches.length!=0)
               main.getHouses(main.loadList.cadetBranches,main.loadList.cadetBranches.length);
+            //Call watch for swornmembers
             if(main.loadList.swornMembers.length!=0)
             {
               main.housecode=1;
               main.getCharacters(main.loadList.swornMembers,main.loadList.swornMembers.length);
             }
+            //Set watch if both members and branches have zero elements
             if(main.loadList.swornMembers.length==0&&main.loadList.cadetBranches.length==0)
             {
                setTimeout(function(){

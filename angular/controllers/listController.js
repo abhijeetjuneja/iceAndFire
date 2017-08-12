@@ -69,6 +69,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
           }
           else
           {
+            //Push a house in the array
             for(var i in value)
             main.housearray.push(value[i]);
           }
@@ -81,6 +82,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
           }
           else
           {
+            //Remove a house from the array
             for(var i in value)
             {
               var index = main.housearray.indexOf(value[i]);
@@ -95,12 +97,14 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
       {
         if(document.getElementById(id).checked)
         {
+            //Push a region in the array
             for(var i in value)
             main.regionarray.push(value[i]);
           
         }
         else
         {
+          //Remove a region from the array
           for(var i in value)
           {
             var index = main.regionarray.indexOf(value[i]);
@@ -122,6 +126,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
             {
               var str=p.allegiances[0].split("/");
               var k=str[str.length-1];
+              //Comparison for tv or housearray and housearray alone
               if(main.tv==1)
                 return k && main.housearray.indexOf(parseInt(k)) !== -1 || p.tvSeries[0] !="";
               else
@@ -129,6 +134,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
             }
             else
             {
+              //Comparison only for tv if no house selected
               if(main.tv==1)
                 return p.tvSeries[0] !="";
               else
@@ -137,6 +143,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
           }
           else
           {
+              //Comparison only for tv if there are no houses
             if(main.tv==1)
               return p.tvSeries[0] !="";
             else
@@ -183,6 +190,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
       }
       if(main.id1==2)
       {
+            //Get value from textarea and return the matched items.Ignore case.
             if ($scope.inputVal=="") {
                 return true;
             }
@@ -196,6 +204,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
       }
       if(main.id1==1&&main.id2==1)
       {
+        //Find if its a book
         if(item.hasOwnProperty('isbn'))
           return true;
         else
@@ -203,6 +212,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
       }
       if(main.id1==1&&main.id2==2)
       {
+        //Find if its a character
         if(item.hasOwnProperty('gender')&&main.houses(item,index))
           return true;
         else
@@ -210,6 +220,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
       }
       if(main.id1==1&&main.id2==3)
       {
+        //Find if its a house
         if(item.hasOwnProperty('region')&&main.region(item,index))
         {
           return true;
@@ -220,6 +231,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
     };
 
     //Tasker based on second filter
+    //Set current page as 0 after every click
     this.filter_items = function(id){
       if(main.id1==2)
       {
