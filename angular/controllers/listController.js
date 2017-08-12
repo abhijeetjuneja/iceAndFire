@@ -120,9 +120,11 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
     this.houses=function(p,index){
         if(p.hasOwnProperty('allegiances'))
         {
-          if(main.housearray.length!=0)
-          {         
-            if(p.allegiances.length!=0)
+          var hlength=main.housearray.length;
+          if(hlength!=0)
+          {  
+            var plength=p.allegiances.length;       
+            if(plength!=0)
             {
               var str=p.allegiances[0].split("/");
               var k=str[str.length-1];
