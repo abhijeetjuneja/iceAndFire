@@ -99,28 +99,7 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
                   });
                 },1000);
                
-              }
-              if(main.housewatch==1&&main.loadList.swornMembers.length!=0)
-              {
-                setTimeout(function(){
-                $scope.$apply(function() {
-                  $scope.loading=false;
-                  setTimeout(function(){
-                  $(".spinner").css('display','none');
-                  $(".detailBook").show();
-                    var h1;
-                  var h2=$("#wrapper").height();
-                  if(h2<window.innerHeight)
-                  {
-                    var h3=$("body").height();
-                    h1=h3-h2;
-                    $("#myFooter").css('margin-top',h1);
-                  }
-                  },1000);
-                  });
-                },1000);
-              }
-             
+              }             
             }
           }, function errorCallback(response,type){
             console.log(baseUrl);
