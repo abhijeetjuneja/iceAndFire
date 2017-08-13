@@ -12,11 +12,12 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
     this.second_click="None";
     this.first_click="";
     this.currentPage = 0;
-    this.pageSize = 10;
     this.data = [];
     this.loading=true;
     this.value="";
+    this.loading22=true;
     this.valarr=[];
+    this.pageSize=12;
     this.count=0;
     this.seasarr=[];
     this.seasval="";
@@ -25,33 +26,6 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
     this.housearray=[];
     this.regionarray=[];
     $scope.inputVal="";
-
-
-    $( document ).ready(function() {
-      var h=window.innerHeight;
-      var w=window.innerWidth;
-      var width=document.getElementsByClassName("characterStyle").innerWidth;
-      document.getElementsByClassName("characterStyle").css('height',width);
-      document.getElementsByClassName("bookStyle").css('height',width);
-      document.getElementsByClassName("houseStyle").css('height',width);
-      if(w>767&&w<1200)
-        main.pageSize=12;
-      if(w<768)
-        main.pageSize=10;
-    });
-     //Adjust on orientation change
-    $(window).on("orientationchange",function(){
-      var h=window.innerHeight;
-      var w=window.innerWidth;
-      var width=document.getElementsByClassName("characterStyle");
-      document.getElementsByClassName("characterStyle").css('height',width);
-      document.getElementsByClassName("bookStyle").css('height',width);
-      document.getElementsByClassName("houseStyle").css('height',width);
-      if(w>767&&w<1200)
-        main.pageSize=12;
-      if(w<768)
-        main.pageSize=10;
-    });
 
     //Calculate number of page for page filter
     this.numberOfPages=function(l){
@@ -371,8 +345,11 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
             main.loadHouse(i);
             else 
             {
+              $('.spinner').hide();
+              $('.pages').show();
+              $('.secondRow').show();
               main.sortList();
-              main.loading=false;
+              
             }
 
           }, function errorCallback(response){
