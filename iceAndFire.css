@@ -241,9 +241,6 @@ a:hover{
   filter: drop-shadow(0px 16px 16px white);
 }
 
-.bookStyle::before{
-  padding-bottom: 13.66%;
-}
 .bookStyle{
   padding:2vh;
   font-size: 20px;
@@ -268,9 +265,6 @@ a:hover{
   filter: drop-shadow(0px 16px 16px white);
   cursor:pointer;
 }
-.characterStyle::before{
-  padding-bottom: 13.66%;
-}
 .characterStyle{
   padding:2vh;
   font-size: 20px;
@@ -282,15 +276,11 @@ a:hover{
   background-repeat: no-repeat;
   color: white;
   margin:auto;
-  padding-bottom: 13.66%;
   text-align: center;
   margin-left: 1.666%;
   margin-right: 1.666%;
   margin-top: 5vh;
   margin-bottom: 5vh;
-}
-.houseStyle::before{
-  padding-bottom: 13.66%;
 }
 .houseStyle{
   padding:2vh;
@@ -303,7 +293,6 @@ a:hover{
   background-repeat: no-repeat;
   color: white;
   margin:auto;
-  padding-bottom: 13.66%;
   text-align: center;
   margin-left: 1.666%;
   margin-right: 1.666%;
@@ -377,11 +366,7 @@ a:hover{
   .characterStyle,.bookStyle,.houseStyle{
     margin-left: 4.1666%;
     margin-right: 4.1666%;
-    
 }
-  .characterStyle::before,.bookStyle::before,.houseStyle::before{
-    padding-bottom: 20%;
-  }
 
 
 }
@@ -392,11 +377,7 @@ a:hover{
   .characterStyle,.bookStyle,.houseStyle{
     margin-left: 4.1666%;
     margin-right: 4.1666%;
-    padding-bottom: 20%;
 }
-  .characterStyle::before,.bookStyle::before,.houseStyle::before{
-    padding-bottom: 20%;
-  }
 
   
 }
@@ -405,11 +386,7 @@ a:hover{
   .characterStyle,.bookStyle,.houseStyle{
     margin-left: 4.1666%;
     margin-right: 4.1666%;
-    
 }
-    .characterStyle::before,.bookStyle::before,.houseStyle::before{
-    padding-bottom: 33.66%;
-  }
  
 
 }
@@ -419,12 +396,7 @@ a:hover{
     width:70%;
     margin-left: 15%;
     margin-right: 15%;
-    
 }
-  .characterStyle::before,.bookStyle::before,.houseStyle::before{
-    padding-bottom: 50%;
-  }
- 
 
   .detailBook{
     width:100%;
