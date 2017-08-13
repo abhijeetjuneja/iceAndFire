@@ -251,7 +251,7 @@ a:hover{
   background-repeat: no-repeat;
   color: black;
   margin:auto;
-  height:30vmax!important;
+  padding-bottom: 100%;
   text-align: center;
   margin-left: 1.666%;
   margin-right: 1.666%;
@@ -277,7 +277,7 @@ a:hover{
   background-repeat: no-repeat;
   color: white;
   margin:auto;
-  height:30vmax!important;
+  padding-bottom: 100%;
   text-align: center;
   margin-left: 1.666%;
   margin-right: 1.666%;
@@ -295,7 +295,7 @@ a:hover{
   background-repeat: no-repeat;
   color: white;
   margin:auto;
-  height:30vmax!important;
+  padding-bottom: 100%;
   text-align: center;
   margin-left: 1.666%;
   margin-right: 1.666%;
