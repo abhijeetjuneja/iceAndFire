@@ -26,6 +26,23 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
     this.regionarray=[];
     $scope.inputVal="";
 
+
+    $( document ).ready(function() {
+    var w=window.innerWidth;
+    if(w>767&&w<1200)
+      main.pageSize=12;
+    if(w<768)
+      main.pageSize=10;
+    });
+     //Adjust on orientation change
+    $(window).on("orientationchange",function(){
+    var w=window.innerWidth;
+    if(w>767&&w<1200)
+      main.pageSize=12;
+    if(w<768)
+      main.pageSize=10;
+    });
+
     //Calculate number of page for page filter
     this.numberOfPages=function(l){
         return Math.ceil(l/main.pageSize);
