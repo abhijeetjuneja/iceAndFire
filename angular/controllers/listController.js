@@ -30,7 +30,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
     $( document ).ready(function() {
       var h=window.innerHeight;
       var w=window.innerWidth;
-      var width=document.getElementsByClassName("characterStyle");
+      var width=document.getElementsByClassName("characterStyle").innerWidth;
       document.getElementsByClassName("characterStyle").css('height',width);
       document.getElementsByClassName("bookStyle").css('height',width);
       document.getElementsByClassName("houseStyle").css('height',width);
