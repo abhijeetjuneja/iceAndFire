@@ -487,5 +487,10 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
     });
 
 
+     $( document ).ready(function() {
+    $('body').css('overflow-y','scroll');
+  });
+
+
 
 }]);

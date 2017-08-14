@@ -370,5 +370,10 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
     };
 
 
+      $( document ).ready(function() {
+    $('body').css('overflow-y','scroll');
+  });
+
+
 
 }]);
