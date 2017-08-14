@@ -17,7 +17,10 @@ html{
   height: 100%; 
 }
 
-
+.navbar{
+   position: relative; /* <-- Added */
+    z-index: 1;
+}
 
 #wrapper {
   min-height:100%;
@@ -61,10 +64,7 @@ html{
 .navbar-default .navbar-nav .open .dropdown-menu>li:hover{
   background-color: white;
 }
-.dropdown-menu{
-  overflow-y: scroll;
-  height: 100px;
-}
+
 hr { 
     display: block;
     margin-top: 0.5em;
