@@ -23,6 +23,26 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
     $scope.loading=true;
 
 
+    this.timeoutAndWatch=function(){
+      setTimeout(function(){
+      $scope.$apply(function() {
+        $scope.loading=false;
+       setTimeout(function(){
+        $(".spinner").css('display','none');
+        $(".detailBook").show();
+        var h1;
+        var h2=$("#wrapper").height();
+        if(h2<window.innerHeight)
+        {
+          var h3=$("body").height();
+          h1=h3-h2;
+          $("#myFooter").css('margin-top',h1);
+        }
+        },1000);
+        });
+      },1000);
+    };
+
     //Back button
     this.goBack =function() {
       window.history.back();
@@ -59,103 +79,36 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
               //Set watch for swornmembers if it has elements
               if(main.housewatch==1&&main.loadList.swornMembers.length!=0)
               {
-                setTimeout(function(){
-                $scope.$apply(function() {
-                  $scope.loading=false;
-                 setTimeout(function(){
-                  $(".spinner").css('display','none');
-                  $(".detailBook").show();
-                  var h1;
-                  var h2=$("#wrapper").height();
-                  if(h2<window.innerHeight)
-                  {
-                    var h3=$("body").height();
-                    h1=h3-h2;
-                    $("#myFooter").css('margin-top',h1);
-                  }
-                  },1000);
-                  });
-                },1000);
+                main.timeoutAndWatch();
               }
               //Set watch for books
               if(main.bookwatch==1)
               {
-                setTimeout(function(){
-                $scope.$apply(function() {
-                  main.loading1=false;
-                  $scope.loading=false;
-                 setTimeout(function(){
-                  $(".spinner").css('display','none');
-                  $(".detailBook").show();
-                  var h1;
-                  var h2=$("#wrapper").height();
-                  if(h2<window.innerHeight)
-                  {
-                    var h3=$("body").height();
-                    h1=h3-h2;
-                    $("#myFooter").css('margin-top',h1);
-                  }
-                  },1000);
-                  });
-                },1000);
-               
+                main.timeoutAndWatch();
               }             
             }
           }, function errorCallback(response,type){
-            console.log(baseUrl);
-            console.log(response);
-            console.log(type);
-            if(main.charIndex<l)
-            {
-              main.charIndex++;
-              main.getCharacters(chars,l);
-            }
-            else 
-            {
-              main.charIndex=0;
-              //Set watch for swornmembers if it has elements
-              if(main.housewatch==1&&main.loadList.swornMembers.length!=0)
+              console.log(baseUrl);
+              console.log(response);
+              console.log(type);
+              if(main.charIndex<l)
               {
-                setTimeout(function(){
-                  $scope.$apply(function() {
-                    $scope.loading=false;
-                    setTimeout(function(){
-                    $(".spinner").css('display','none');
-                    $(".detailBook").show();
-                    var h1;
-                    var h2=$("#wrapper").height();
-                    if(h2<window.innerHeight)
-                    {
-                      var h3=$("body").height();
-                      h1=h3-h2;
-                      $("#myFooter").css('margin-top',h1);
-                    }
-                    },1000);
-                    });
-                },1000);
+                main.charIndex++;
+                main.getCharacters(chars,l);
               }
-              //Set watch for books
-              if(main.bookwatch==1)
+              else 
               {
-               setTimeout(function(){
-                  $scope.$apply(function() {
-                    $scope.loading=false;
-                    setTimeout(function(){
-                    $(".spinner").css('display','none');
-                    $(".detailBook").show();
-                    var h1;
-                    var h2=$("#wrapper").height();
-                    if(h2<window.innerHeight)
-                    {
-                      var h3=$("body").height();
-                      h1=h3-h2;
-                      $("#myFooter").css('margin-top',h1);
-                    }
-                    },1000);
-                    });
-                },1000);
-              }
-             
+                main.charIndex=0;
+                //Set watch for swornmembers if it has elements
+                if(main.housewatch==1&&main.loadList.swornMembers.length!=0)
+                {
+                  main.timeoutAndWatch();
+                }
+                //Set watch for books
+                if(main.bookwatch==1)
+                {
+                  main.timeoutAndWatch();
+                }             
             }
           }
           );
@@ -187,61 +140,28 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
             //Set watch for books character appeared in
               if(main.charwatch==1&&main.charcode==0&&main.charbcount==2&&(main.loadList.books.length!=0||main.loadList.povBooks.length!=0))
               {
-                setTimeout(function(){
-                  $scope.$apply(function() {
-                    $scope.loading=false;
-                    setTimeout(function(){
-                    $(".spinner").css('display','none');
-                    $(".detailBook").show();
-                    var h1;
-                    var h2=$("#wrapper").height();
-                    if(h2<window.innerHeight)
-                    {
-                      var h3=$("body").height();
-                      h1=h3-h2;
-                      $("#myFooter").css('margin-top',h1);
-                    }
-                    },1000);
-                    });
-                },1000);
-              }
-            
+                main.timeoutAndWatch();
+              }           
           }
           }, function errorCallback(response,type){
-            console.log(baseUrl);
-            console.log(response);
-            console.log(type);
-            if(main.bookIndex<l-1)
-            {
-              main.bookIndex++;
-              main.getBooks(chars,l);
-            }
-            else 
-            {
-              main.bookIndex=0;
-              //Set watch for characters appeared in
-              if(main.charwatch==1&&(main.loadList.books.length!=0||main.loadList.povBooks.length!=0))
+              console.log(baseUrl);
+              console.log(response);
+              console.log(type);
+              if(main.bookIndex<l-1)
               {
-                setTimeout(function(){
-                  $scope.$apply(function() {
-                    $scope.loading=false;
-                    setTimeout(function(){
-                    $(".spinner").css('display','none');
-                    $(".detailBook").show();
-                    var h1;
-                    var h2=$("#wrapper").height();
-                    if(h2<window.innerHeight)
-                    {
-                      var h3=$("body").height();
-                      h1=h3-h2;
-                      $("#myFooter").css('margin-top',h1);
-                    }
-                    },1000);
-                    });
-                },1000);
+                main.bookIndex++;
+                main.getBooks(chars,l);
               }
-            
-            }
+              else 
+              {
+                main.bookIndex=0;
+                //Set watch for characters appeared in
+                if(main.charwatch==1&&(main.loadList.books.length!=0||main.loadList.povBooks.length!=0))
+                {
+                  main.timeoutAndWatch();
+                }
+              
+              }
           }
           );
         };
@@ -272,101 +192,37 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
             //Set watch for cadetBranches if it has elements more than sworn members
             if(main.housewatch==1&&main.loadList.cadetBranches.length!=0&&main.housecode==0)
             {
-               setTimeout(function(){
-                  $scope.$apply(function() {
-                    $scope.loading=false;
-                    setTimeout(function(){
-                    $(".spinner").css('display','none');
-                    $(".detailBook").show();
-                    var h1;
-                    var h2=$("#wrapper").height();
-                    if(h2<window.innerHeight)
-                    {
-                      var h3=$("body").height();
-                      h1=h3-h2;
-                      $("#myFooter").css('margin-top',h1);
-                    }
-                    },1000);
-                    });
-                },1000);
+              main.timeoutAndWatch();
             }
             //Set watch for allegiances of a character
             if(main.charwatch==1&&main.loadList.allegiances.length!=0&&main.charcode==1)
             {
-              setTimeout(function(){
-                  $scope.$apply(function() {
-                    $scope.loading=false;
-                    setTimeout(function(){
-                    $(".spinner").css('display','none');
-                    $(".detailBook").show();
-                    var h1;
-                    var h2=$("#wrapper").height();
-                    if(h2<window.innerHeight)
-                    {
-                      var h3=$("body").height();
-                      h1=h3-h2;
-                      $("#myFooter").css('margin-top',h1);
-                    }
-                    },1000);
-                    });
-                },1000);
+              main.timeoutAndWatch();
             }
           }
           }, function errorCallback(response,type){
-            console.log(baseUrl);
-            console.log(response);
-            console.log(type);
-            if(main.houseIndex<l-1)
-            {
-              main.houseIndex++;
-              main.getHouses(chars,l);
-            }
-            else 
-            {
-              main.houseIndex=0;
-               //Set watch for cadetBranches if it has elements more than sworn members
-              if(main.housewatch==1&&main.loadList.cadetBranches.length!=0&&main.housecode==0)
+              console.log(baseUrl);
+              console.log(response);
+              console.log(type);
+              if(main.houseIndex<l-1)
               {
-                 setTimeout(function(){
-                  $scope.$apply(function() {
-                    $scope.loading=false;
-                    setTimeout(function(){
-                    $(".spinner").css('display','none');
-                    $(".detailBook").show();
-                    var h1;
-                    var h2=$("#wrapper").height();
-                    if(h2<window.innerHeight)
-                    {
-                      var h3=$("body").height();
-                      h1=h3-h2;
-                      $("#myFooter").css('margin-top',h1);
-                    }
-                    },1000);
-                    });
-                },1000);
+                main.houseIndex++;
+                main.getHouses(chars,l);
               }
-              //Set watch for allegiances of a character
-              if(main.charwatch==1&&main.loadList.allegiances.length!=0&&main.charcode==1)
+              else 
               {
-                setTimeout(function(){
-                  $scope.$apply(function() {
-                    $scope.loading=false;
-                    setTimeout(function(){
-                    $(".spinner").css('display','none');
-                    $(".detailBook").show();
-                    var h1;
-                    var h2=$("#wrapper").height();
-                    if(h2<window.innerHeight)
-                    {
-                      var h3=$("body").height();
-                      h1=h3-h2;
-                      $("#myFooter").css('margin-top',h1);
-                    }
-                    },1000);
-                    });
-                },1000);
+                main.houseIndex=0;
+                 //Set watch for cadetBranches if it has elements more than sworn members
+                if(main.housewatch==1&&main.loadList.cadetBranches.length!=0&&main.housecode==0)
+                {
+                  main.timeoutAndWatch();
+                }
+                //Set watch for allegiances of a character
+                if(main.charwatch==1&&main.loadList.allegiances.length!=0&&main.charcode==1)
+                {
+                  main.timeoutAndWatch();
+                }
               }
-            }
           }
           );
         };
@@ -399,6 +255,7 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
                 main.getBooks(main.loadList.povBooks,main.loadList.povBooks.length);
               else
                 main.charbcount++;
+
               //Set watch for allegiances only if it has more elements than books and povBooks combined
               if(main.loadList.allegiances.length!=0)
               {
@@ -408,30 +265,13 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
               }
               if(main.loadList.books.length==0&&main.loadList.povBooks.length==0&&main.loadList.allegiances.length==0)
               {
-                setTimeout(function(){
-                  $scope.$apply(function() {
-                    $scope.loading=false;
-                    setTimeout(function(){
-                    $(".spinner").css('display','none');
-                    $(".detailBook").show();
-                    var h1;
-                    var h2=$("#wrapper").height();
-                    if(h2<window.innerHeight)
-                    {
-                      var h3=$("body").height();
-                      h1=h3-h2;
-                      $("#myFooter").css('margin-top',h1);
-                    }
-                    },1000);
-                    });
-                },1000);
+                main.timeoutAndWatch();
               }
             } 
           //Get Cadetbranches and sworn members
           if(main.loadList.hasOwnProperty('region'))
           {
-            main.housewatch=1;
-            
+            main.housewatch=1;            
             if(main.loadList.cadetBranches.length!=0)
               main.getHouses(main.loadList.cadetBranches,main.loadList.cadetBranches.length);
             //Call watch for swornmembers
@@ -443,30 +283,13 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
             //Set watch if both members and branches have zero elements
             if(main.loadList.swornMembers.length==0&&main.loadList.cadetBranches.length==0)
             {
-               setTimeout(function(){
-                $scope.$apply(function() {
-                  $scope.loading=false;
-                  setTimeout(function(){
-                  $(".spinner").css('display','none');
-                  $(".detailBook").show();
-                  var h1;
-                  var h2=$("#wrapper").height();
-                  if(h2<window.innerHeight)
-                  {
-                    var h3=$("body").height();
-                    h1=h3-h2;
-                    $("#myFooter").css('margin-top',h1);
-                  }
-                  },1000);
-                  });
-                },1000);
+              main.timeoutAndWatch();
             }
           }
         }, function errorCallback(response,type){
-
-          console.log(response);
-          console.log(type);
-        }
+            console.log(response);
+            console.log(type);
+          }
       );
 
     };
