@@ -193,6 +193,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
         return true;
       if(main.id1==1&&main.id2==0)
       {
+        $('#srow').hide();
         return true;
       }
       if(main.id1==2)
@@ -226,6 +227,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
       }
       if(main.id1==1&&main.id2==1)
       {
+        $('#srow').hide();
         //Find if its a book
         if(item.hasOwnProperty('isbn'))
           return true;
@@ -234,6 +236,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
       }
       if(main.id1==1&&main.id2==2)
       {
+        $('#srow').hide();
         //Find if its a character
         if(item.hasOwnProperty('gender')&&main.houses(item,index))
           return true;
@@ -242,6 +245,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
       }
       if(main.id1==1&&main.id2==3)
       {
+        $('#srow').hide();
         //Find if its a house
         if(item.hasOwnProperty('region')&&main.region(item,index))
         {
