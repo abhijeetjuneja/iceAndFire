@@ -20,6 +20,11 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider,$locat
         	controller 		: 'detailController',
         	controllerAs 	: 'detail'
         })
+        .when('/error',{
+            templateUrl     : 'views/error-view.html',
+            controller      : 'errorController',
+            controllerAs    : 'error'
+        })
         .otherwise(
             {
                 //redirectTo:'/'

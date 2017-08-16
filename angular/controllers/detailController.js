@@ -1,6 +1,6 @@
 //Declare the controller
 
-app.controller('detailController',['$http','IceAndFireService','$scope',function($http,IceAndFireService,$scope){
+app.controller('detailController',['$http','IceAndFireService','$location','$scope',function($http,IceAndFireService,$location,$scope){
 
     var main=this;
     this.loadList={};
@@ -51,6 +51,8 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
     //Get list of list of characters appeared in a book
     this.getCharacters = function(chars,l){
       var baseUrl="https://anapioficeandfire.com/api/characters/";
+      if(main.charIndex<l&&l!=0)
+      {
       var addon=chars[main.charIndex].split("/");
       addon=addon[addon.length-1];
       baseUrl=baseUrl+addon;
@@ -112,11 +114,14 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
             }
           }
           );
+      }
         };
 
     //Get list of list of books appeared the character has appeared in
     this.getBooks = function(chars,l){
       var baseUrl="https://anapioficeandfire.com/api/books/";
+      if(main.bookIndex<l&&l!=0)
+      {
       var addon=chars[main.bookIndex].split("/");
       addon=addon[addon.length-1];
       baseUrl=baseUrl+addon;
@@ -164,11 +169,14 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
               }
           }
           );
+      }
         };
 
     //Get list of list of books appeared the character has appeared in
     this.getHouses = function(chars,l){
       var baseUrl="https://anapioficeandfire.com/api/houses/";
+      if(main.houseIndex<l&&l!=0)
+      {
       var addon=chars[main.houseIndex].split("/");
       addon=addon[addon.length-1];
       baseUrl=baseUrl+addon;
@@ -225,6 +233,7 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
               }
           }
           );
+      }
         };
 
 
@@ -289,6 +298,7 @@ app.controller('detailController',['$http','IceAndFireService','$scope',function
         }, function errorCallback(response,type){
             console.log(response);
             console.log(type);
+            $location.path("/error");
           }
       );
 

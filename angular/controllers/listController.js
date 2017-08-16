@@ -25,10 +25,14 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
     this.tv=0;
     this.housearray=[];
     this.regionarray=[];
+    this.received=0;
+    this.added=0;
     $scope.inputVal="";
+
 
     //Calculate number of page for page filter
     this.numberOfPages=function(l){
+        main.received=l;
         return Math.ceil(l/main.pageSize);
     };
 
@@ -193,17 +197,32 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
       }
       if(main.id1==2)
       {
-            //Get value from textarea and return the matched items.Ignore case.
-            if ($scope.inputVal=="") {
-                return true;
-            }
-            else
-              if(item.name.toLowerCase().indexOf($scope.inputVal.toLowerCase())!==-1)
-              {
-                return true;
-              }
-              else
-                return false;
+        if(main.currentPage>=main.numberOfPages(main.received))
+        {
+          main.currentPage=0;
+        }
+
+        //Show no results
+        if(main.numberOfPages(main.received)==0)
+        {
+          $('#srow').show();
+        }
+        else
+          $('#srow').hide();
+
+        //Get value from textarea and return the matched items.Ignore case.
+        if ($scope.inputVal=="") {
+            return true;
+        }
+        else
+        {
+          if(item.name.toLowerCase().indexOf($scope.inputVal.toLowerCase())!==-1)
+          {
+            return true;
+          }
+          else
+            return false;
+        }
       }
       if(main.id1==1&&main.id2==1)
       {
@@ -301,7 +320,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
           main.loadChar(1);
 
         }, function errorCallback(response,type){
-          alert("some error occurred. Check the console.");
+          $location.path("/error");
           console.log(response);
           console.log(type);
 

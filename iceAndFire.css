@@ -16,7 +16,21 @@ body{
 html{
   height: 100%; 
 }
-
+#srow{
+  color: white;
+  height:30vh;
+  font-size: 30px;
+}
+.error{
+  margin-top: 45vh;
+  margin-bottom: 50vh;
+  color: white;
+  font-weight: bold;
+}
+.errorButton{
+  margin:auto;
+  margin-bottom: 2vh;
+}
 .navbar{
    position: relative; /* <-- Added */
     z-index: 1;
@@ -228,6 +242,7 @@ a:hover{
 }
 .secondRow{
   margin-top: 5vh;
+  min-height: 80vh;
 }
 .img-responsive{
   height:30vh;
