@@ -343,7 +343,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
             }
 
           }, function errorCallback(response){
-
+             $location.path("/error");
             console.log(response);
 
           }
@@ -372,6 +372,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
             }
 
           }, function errorCallback(response){
+             $location.path("/error");
             console.log(response);
           }
         );
