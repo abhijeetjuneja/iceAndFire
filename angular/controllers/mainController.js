@@ -41,7 +41,7 @@ app.controller('mainController',function(){
 			document.getElementById('jumbo').style.paddingTop=s;
 			document.getElementById('jumbo').style.paddingBottom=s;
 
-	    },100);
+	    },50);
 	}
 
  
