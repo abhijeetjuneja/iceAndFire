@@ -38,7 +38,7 @@ app.controller('detailController',['$http','IceAndFireService','$location','$sco
           h1=h3-h2;
           $("#myFooter").css('margin-top',h1);
         }
-        },0);
+        },100);
         });
       },0);
     };
