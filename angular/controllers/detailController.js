@@ -1,6 +1,6 @@
 //Declare the controller
 
-app.controller('detailController',['$http','IceAndFireService','$location','$scope',function($http,IceAndFireService,$location,$scope){
+app.controller('detailController',['$http','IceAndFireService','$location','$scope','$q',function($http,IceAndFireService,$location,$scope,$q){
 
     var main=this;
     this.loadList={};
@@ -38,9 +38,9 @@ app.controller('detailController',['$http','IceAndFireService','$location','$sco
           h1=h3-h2;
           $("#myFooter").css('margin-top',h1);
         }
-        },1000);
+        },0);
         });
-      },1000);
+      },0);
     };
 
     //Back button
@@ -50,103 +50,87 @@ app.controller('detailController',['$http','IceAndFireService','$location','$sco
 
     //Get list of list of characters appeared in a book
     this.getCharacters = function(chars,l){
-      var baseUrl="https://anapioficeandfire.com/api/characters/";
+      var chararr=[];
       if(main.charIndex<l&&l!=0)
       {
-      var addon=chars[main.charIndex].split("/");
-      addon=addon[addon.length-1];
-      baseUrl=baseUrl+addon;
-      IceAndFireService.setUrl(baseUrl);
-      IceAndFireService.getDetail()
-        .then(function successCallback(response){
-          if(response.data.name!=""&&response.data.name!=undefined)
-          {
-            main.charList.push(response.data.name);
-          }
-          else
-            if(response.data.aliases[0]!=undefined)
-            {
-              main.charList.push(response.data.aliases[0]);
-            }
-            if(main.charIndex<chars.length-1)
-            {
-              main.charIndex++;
-              main.getCharacters(chars,l);
-            }
-            else 
-            {
-              //Join all characters in a single string
-              main.charIndex=0;
-              main.charSet=main.charList.join();
-              //Set watch for swornmembers if it has elements
-              if(main.housewatch==1&&main.loadList.swornMembers.length!=0)
+        for(var charIndex=0;charIndex<chars.length;charIndex++)
+        {
+          var baseUrl="https://anapioficeandfire.com/api/characters/";
+          var addon=chars[charIndex].split("/");
+          addon=addon[addon.length-1];
+          baseUrl=baseUrl+addon;
+          IceAndFireService.setUrl(baseUrl);
+          chararr[charIndex]=IceAndFireService.getDetail()
+            .then(function successCallback(response){
+              if(response.data.name!=""&&response.data.name!=undefined)
               {
-                main.timeoutAndWatch();
+                main.charList.push(response.data.name);
               }
-              //Set watch for books
-              if(main.bookwatch==1)
-              {
-                main.timeoutAndWatch();
-              }             
-            }
-          }, function errorCallback(response,type){
-              console.log(baseUrl);
-              console.log(response);
-              console.log(type);
-              if(main.charIndex<l)
-              {
-                main.charIndex++;
-                main.getCharacters(chars,l);
-              }
-              else 
-              {
-                main.charIndex=0;
-                //Set watch for swornmembers if it has elements
-                if(main.housewatch==1&&main.loadList.swornMembers.length!=0)
+              else
+                if(response.data.aliases[0]!=undefined)
                 {
-                  main.timeoutAndWatch();
+                  main.charList.push(response.data.aliases[0]);
                 }
-                //Set watch for books
-                if(main.bookwatch==1)
-                {
-                  main.timeoutAndWatch();
-                }             
-            }
-          }
-          );
-      }
-        };
+              }, function errorCallback(response,type){
+                  console.log(baseUrl);
+                  console.log(response);
+                  console.log(type);
+                  if(main.charIndex<l)
+                  {
+                  }
+                  else 
+                  {
+                    main.charIndex=0;
+                    //Set watch for swornmembers if it has elements
+                    if(main.housewatch==1&&main.loadList.swornMembers.length!=0)
+                    {
+                      main.timeoutAndWatch();
+                    }
+                    //Set watch for books
+                    if(main.bookwatch==1)
+                    {
+                      main.timeoutAndWatch();
+                    }             
+                }
+              }
+              );
 
-    //Get list of list of books appeared the character has appeared in
+          }
+           $q.all(chararr).then(function(){
+           //Join all characters in a single string
+            main.charIndex=0;
+            main.charSet=main.charList.join();
+            //Set watch for swornmembers if it has elements
+            if(main.housewatch==1&&main.loadList.swornMembers.length!=0)
+            {
+              main.timeoutAndWatch();
+            }
+            //Set watch for books
+            if(main.bookwatch==1)
+            {
+              main.timeoutAndWatch();
+            }  
+          });
+      }
+    };
+
+    //Get list of books appeared the character has appeared in
     this.getBooks = function(chars,l){
-      var baseUrl="https://anapioficeandfire.com/api/books/";
+      var chararr=[];
       if(main.bookIndex<l&&l!=0)
       {
-      var addon=chars[main.bookIndex].split("/");
+      for(var bookIndex=0;bookIndex<chars.length;bookIndex++)
+      {
+      var baseUrl="https://anapioficeandfire.com/api/books/";
+      var addon=chars[bookIndex].split("/");
       addon=addon[addon.length-1];
       baseUrl=baseUrl+addon;
       IceAndFireService.setUrl(baseUrl);
-      IceAndFireService.getDetail()
+      chararr[bookIndex]=IceAndFireService.getDetail()
         .then(function successCallback(response){
           if(response.data.name!=""&&response.data.name!=undefined)
           {
             main.bookList.push(response.data.name);
-          }
-          if(main.bookIndex<chars.length-1)
-          {
-            main.bookIndex++;
-            main.getBooks(chars,l);
-          }
-          else 
-          {
-            main.charbcount++;
-            main.bookSet=main.bookList.join();
-            main.bookIndex=0;
-            //Set watch for books character appeared in
-              if(main.charwatch==1&&main.charcode==0&&main.charbcount==2&&(main.loadList.books.length!=0||main.loadList.povBooks.length!=0))
-              {
-                main.timeoutAndWatch();
-              }           
           }
           }, function errorCallback(response,type){
               console.log(baseUrl);
@@ -154,12 +138,9 @@ app.controller('detailController',['$http','IceAndFireService','$location','$sco
               console.log(type);
               if(main.bookIndex<l-1)
               {
-                main.bookIndex++;
-                main.getBooks(chars,l);
               }
               else 
               {
-                main.bookIndex=0;
                 //Set watch for characters appeared in
                 if(main.charwatch==1&&(main.loadList.books.length!=0||main.loadList.povBooks.length!=0))
                 {
@@ -169,34 +150,64 @@ app.controller('detailController',['$http','IceAndFireService','$location','$sco
               }
           }
           );
+        }
+         $q.all(chararr).then(function(){
+         main.charbcount++;
+         main.bookSet=main.bookList.join();
+         //Set watch for books character appeared in
+          if(main.charwatch==1&&main.charcode==0&&main.charbcount==2&&(main.loadList.books.length!=0||main.loadList.povBooks.length!=0))
+          {
+            main.timeoutAndWatch();
+          }  
+          }); 
       }
         };
 
-    //Get list of list of books appeared the character has appeared in
+    //Get allegiances
     this.getHouses = function(chars,l){
-      var baseUrl="https://anapioficeandfire.com/api/houses/";
+      var chararr=[];
       if(main.houseIndex<l&&l!=0)
       {
-      var addon=chars[main.houseIndex].split("/");
-      addon=addon[addon.length-1];
-      baseUrl=baseUrl+addon;
-      IceAndFireService.setUrl(baseUrl);
-      IceAndFireService.getDetail()
-        .then(function successCallback(response){
-          if(response.data.name!=""&&response.data.name!=undefined)
-          {
-            main.houseList.push(response.data.name);
+        for(var houseIndex=0;houseIndex<chars.length;houseIndex++)
+        {
+          
+          var baseUrl="https://anapioficeandfire.com/api/houses/";
+          var addon=chars[houseIndex].split("/");
+          addon=addon[addon.length-1];
+          baseUrl=baseUrl+addon;
+          IceAndFireService.setUrl(baseUrl);
+          chararr[houseIndex]=IceAndFireService.getDetail()
+            .then(function successCallback(response){
+              if(response.data.name!=""&&response.data.name!=undefined)
+              {
+                main.houseList.push(response.data.name);
+              }
+              }, function errorCallback(response,type){
+                  console.log(baseUrl);
+                  console.log(response);
+                  console.log(type);
+                  if(main.houseIndex<l-1)
+                  {
+                  }
+                  else 
+                  {
+                    main.houseIndex=0;
+                     //Set watch for cadetBranches if it has elements more than sworn members
+                    if(main.housewatch==1&&main.loadList.cadetBranches.length!=0&&main.housecode==0)
+                    {
+                      main.timeoutAndWatch();
+                    }
+                    //Set watch for allegiances of a character
+                    if(main.charwatch==1&&main.loadList.allegiances.length!=0&&main.charcode==1)
+                    {
+                      main.timeoutAndWatch();
+                    }
+                  }
+              }
+              );
           }
-
-          if(main.houseIndex<chars.length-1)
-          {
-            main.houseIndex++;
-            main.getHouses(chars,l);
-          }
-          else 
-          {
-            main.houseSet=main.houseList.join();
-            main.houseIndex=0;
+          $q.all(chararr).then(function(){
+            main.houseSet=main.houseList.join();  
             //Set watch for cadetBranches if it has elements more than sworn members
             if(main.housewatch==1&&main.loadList.cadetBranches.length!=0&&main.housecode==0)
             {
@@ -207,32 +218,8 @@ app.controller('detailController',['$http','IceAndFireService','$location','$sco
             {
               main.timeoutAndWatch();
             }
-          }
-          }, function errorCallback(response,type){
-              console.log(baseUrl);
-              console.log(response);
-              console.log(type);
-              if(main.houseIndex<l-1)
-              {
-                main.houseIndex++;
-                main.getHouses(chars,l);
-              }
-              else 
-              {
-                main.houseIndex=0;
-                 //Set watch for cadetBranches if it has elements more than sworn members
-                if(main.housewatch==1&&main.loadList.cadetBranches.length!=0&&main.housecode==0)
-                {
-                  main.timeoutAndWatch();
-                }
-                //Set watch for allegiances of a character
-                if(main.charwatch==1&&main.loadList.allegiances.length!=0&&main.charcode==1)
-                {
-                  main.timeoutAndWatch();
-                }
-              }
-          }
-          );
+          });
+
       }
         };
 

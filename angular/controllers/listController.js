@@ -1,6 +1,6 @@
 //Declare the controller
 
-app.controller('listController',['$http','IceAndFireService','$location','$scope',function($http,IceAndFireService,$location,$scope){
+app.controller('listController',['$http','IceAndFireService','$location','$scope','$q',function($http,IceAndFireService,$location,$scope,$q){
 
     var main=this;
 
@@ -335,23 +335,23 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
 
     //Load characters from service
     this.loadChar = function(i){
-        IceAndFireService.getChar(i,'&pageSize=50')
-          .then(function successCallback(response){
-            main.loadList = main.loadList.concat(response.data);
-            i++;
-            if(i<44)
-            main.loadChar(i);
-            else 
-            {
-              main.loadHouse(1);
+        var chararr=[];
+        for(var j=i;j<44;j++)
+        {
+          chararr=IceAndFireService.getChar(j,'&pageSize=50')
+            .then(function successCallback(response){
+              main.loadList = main.loadList.concat(response.data);
+            }, function errorCallback(response){
+               $location.path("/error");
+              console.log(response);
+
             }
+          );
+        }
+        $q.all(chararr).then(function(){
+          main.loadHouse(1);
+        });
 
-          }, function errorCallback(response){
-             $location.path("/error");
-            console.log(response);
-
-          }
-        );
 
 
     };
@@ -360,26 +360,25 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
 
     //Load Houses from service
     this.loadHouse = function(i){
-        IceAndFireService.getHouse(i,'&pageSize=50')
-          .then(function successCallback(response){
-            main.loadList = main.loadList.concat(response.data);
-            i++;
-            if(i<10)
-            main.loadHouse(i);
-            else 
-            {
-              $('.spinner').hide();
-              $('.pages').show();
-              $('.secondRow').show();
-              main.sortList();
-              
+        var chararr=[];
+        for(var j=i;j<10;j++)
+        {
+          chararr[j]=IceAndFireService.getHouse(j,'&pageSize=50')
+            .then(function successCallback(response){
+              main.loadList = main.loadList.concat(response.data);
+            }, function errorCallback(response){
+               $location.path("/error");
+              console.log(response);
             }
+          );
+        }
+        $q.all(chararr).then(function(){
+          $('.spinner').hide();
+          $('.pages').show();
+          $('.secondRow').show();
+          main.sortList();
+      });
 
-          }, function errorCallback(response){
-             $location.path("/error");
-            console.log(response);
-          }
-        );
 
 
     };

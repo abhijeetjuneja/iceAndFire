@@ -32,7 +32,10 @@ app.directive('detailCard', function($timeout,$rootScope) {
                 elem.append("<h3><b>Released - "+d.toUTCString()+"</b></h3>");
                 console.log("calling featured characters");
                 if($scope.data.loadList.povCharacters[0]!="")
-                  elem.append("<h3><b>Featured Characters - "+$scope.data.charSet+"</b></h3>");   
+                {
+                  elem.append('<h3><b>Featured Characters</b></h3>');
+                  elem.append("<h3><hr><b>"+$scope.data.charSet+"</b></h3>");   
+                }
               }
               if($scope.data.loadList.gender!=null)
               {

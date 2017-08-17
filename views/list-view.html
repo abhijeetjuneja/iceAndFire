@@ -26,6 +26,7 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right colorWhite">
+            <!-- First filter list -->
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Filter by {{list.first_click}}</b><span class="caret"></span></a>
               <ul class="dropdown-menu text-center">
@@ -33,6 +34,7 @@
                 <li  ng-click="list.selected_first(2)"><center><b>Name</b></center></li>
               </ul>
             </li>
+            <!-- Second filter list -->
             <li class="dropdown" ng-show="list.id1 == 1">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>{{list.second_click}}</b><span class="caret"></span></a>
               <ul class="dropdown-menu colorWhite text-center">
@@ -42,6 +44,7 @@
                 <li ng-click="list.selected_second(3)"><center><b>Houses</b></center></li>
               </ul>
             </li>
+            <!-- Second sub-filter -->
             <li class="dropdown" ng-show="list.id1 == 2">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Enter Name</b><span class="caret"></span></a>
               <ul class="dropdown-menu colorWhite">
@@ -54,6 +57,7 @@
                 </li>
               </ul>
             </li>
+            <!-- Second sub-filter third option -->
             <li class="dropdown" ng-show="list.id2 == 2">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Allegiance and TV</b><span class="caret"></span></a>
               <ul class="dropdown-menu colorWhite text-center">
@@ -67,6 +71,7 @@
                 <li><center><input type="checkbox" name="gender" value="male" id="check8" ng-click="list.selected_third(0,'check8',0)"><b>Appeared on TV</b></center></li>
               </ul>
             </li>
+             <!-- Second sub-filter fourth option -->
              <li class="dropdown" ng-show="list.id2 == 3">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Region</b><span class="caret"></span></a>
               <ul class="dropdown-menu colorWhite text-center">
@@ -99,7 +104,7 @@
       </button>
     </div>
   </div>
-   <div id="srow" class="text-center" style="display: none"><br><br><br>No Results</div>
+  <div id="srow" class="text-center" style="display: none"><br><br><br>No Results</div>
   <div class="row secondRow" style="display: none" >
     <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2 cardStyle" ng-repeat="data in filtered = ( list.loadList | filter : list.filter_item ) |  startFrom:list.currentPage*list.pageSize | limitTo:list.pageSize" >
       <my-card ng-click="list.sendDetail(data.url)" data="data" >
