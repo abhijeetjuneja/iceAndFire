@@ -15,12 +15,22 @@ app.controller('mainController',function(){
 	});
 
 	//Adjust jumbotron padding on orientation change
-	
-   $(window).on('orientationchange', function(event) {
-        console.log(window.orientation);
-        if(window.orientation==0||window.orientation==180)
-        {
-        	var h1=document.getElementById('nav1').offsetHeight;
+
+	$(window).bind('orientationchange',function(e) {
+	  fixOrientation();
+	});
+
+	$(window).bind('resize',function(e) {
+	  fixOrientation();
+	});
+
+	function fixOrientation() {
+
+	    setTimeout(function() {
+
+	        var windowWidth = window.innerWidth;
+
+	        var h1=document.getElementById('nav1').offsetHeight;
 			document.getElementById('jumbo').style.paddingTop=0;
 			document.getElementById('jumbo').style.paddingBottom=0;
 			var h2=document.getElementById('jumbo').offsetHeight;
@@ -30,22 +40,9 @@ app.controller('mainController',function(){
 			s=h4+"px";
 			document.getElementById('jumbo').style.paddingTop=s;
 			document.getElementById('jumbo').style.paddingBottom=s;
-        }
-        if(window.orientation==90||window.orientation==-90)
-        {
-        	var h1=document.getElementById('nav1').offsetHeight;
-			document.getElementById('jumbo').style.paddingTop=0;
-			document.getElementById('jumbo').style.paddingBottom=0;
-			var h2=document.getElementById('jumbo').offsetHeight;
-			var h3=document.getElementById('myFooter').offsetHeight;
-			var h4=window.innerHeight-(h1+h2+h3);
-			h4=h4/2;
-			s=h4+"px";
-			document.getElementById('jumbo').style.paddingTop=s;
-			document.getElementById('jumbo').style.paddingBottom=s;
-        }
-        
-    });
+
+	    },100);
+	}
 
  
 
