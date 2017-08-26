@@ -7,11 +7,11 @@ app.factory('IceAndFireService',function allData($http){
   var baseUrl="https://www.anapioficeandfire.com/api/";
 
   //Get all books
-  iceAndFireApi.getBooks = function(){
+  iceAndFireApi.getBooks = function(index,s){
         return $http({
 
           method : 'GET',
-          url : baseUrl + 'books'
+          url : baseUrl + 'books'+'?page='+index+s
         });
 
         };

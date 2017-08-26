@@ -316,7 +316,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
 
     //Load books from service
     this.loadBooks = function(){
-      IceAndFireService.getBooks()
+      IceAndFireService.getBooks(1,'&pageSize=12')
         .then(function successCallback(response){
 
           main.loading=true;

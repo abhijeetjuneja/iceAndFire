@@ -31,7 +31,7 @@ app.directive('detailCard', function($timeout,$rootScope) {
                 var d= new Date($scope.data.loadList.released);
                 elem.append("<h3><b>Released - "+d.toUTCString()+"</b></h3>");
                 console.log("calling featured characters");
-                if($scope.data.loadList.povCharacters[0]!="")
+                if($scope.data.loadList.povCharacters[0]!=""&&$scope.data.loadList.povCharacters.length!=0)
                 {
                   elem.append('<h3><b>Featured Characters</b></h3>');
                   elem.append("<h3><hr><b>"+$scope.data.charSet+"</b></h3>");   

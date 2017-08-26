@@ -234,7 +234,10 @@ app.controller('detailController',['$http','IceAndFireService','$location','$sco
           //Get all characters
           if(main.loadList.hasOwnProperty('povCharacters'))
           {
+            if(main.loadList.povCharacters.length!=0)
             main.getCharacters(main.loadList.povCharacters,main.loadList.povCharacters.length);
+            else
+              main.timeoutAndWatch();
             main.bookwatch=1;
           }
           else
