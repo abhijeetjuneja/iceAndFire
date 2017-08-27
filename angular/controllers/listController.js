@@ -263,37 +263,57 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
       {
         main.currentPage = 0;
         main.second_click="Enter Name";
+        main.sortList();
       }
       if(main.id1==1&&main.id2==0)
       {
         main.currentPage = 0;
         main.second_click="None";
-   
+        main.sortList();
       }
       if(main.id1==1&&main.id2==1)
       {
         main.currentPage = 0;
         main.second_click="Books";
+        main.sortList();
       }
       if(main.id1==1&&main.id2==2)
       {
         main.currentPage = 0;
         main.second_click="Characters";
+        main.sortList();
       }
       if(main.id2==3)
       {
         main.currentPage = 0;
         main.second_click="Houses";
+        main.sortList();
       }
     };
 
     //Sort function
     this.sortList = function(){
       function compare(a,b) {
-          if (a.name < b.name)
+          if(a.name=="")
+            a.name="zzz";
+          if(b.name=="")
+            b.name="zzz";
+          if (a.name < b.name )
+          {
+             if(a.name=="zzz")
+              a.name="Unkown";
+              if(b.name=="zzz")
+              b.name="Unkown";
              return -1;
+          }
           if (a.name > b.name)
+          {
+            if(a.name=="zzz")
+              a.name="Unkown";
+              if(b.name=="zzz")
+              b.name="Unkown";
             return 1;
+          }
           return 0;
         }
         main.currentPage = 0;
