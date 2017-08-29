@@ -25,6 +25,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
     this.tv=0;
     this.housearray=[];
     this.regionarray=[];
+    this.pagearray=[];
     this.received=0;
     this.added=0;
     $scope.inputVal="";
@@ -36,10 +37,27 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
         return Math.ceil(l/main.pageSize);
     };
 
+    this.unCheckAndEmptyArray = function() {
+        for(var i=1;i<21;i++)
+        {
+          var x="check"+i;
+          var y="page"+i;
+          if(i<5)
+          {
+            document.getElementById(y).checked = false;
+          }
+          document.getElementById(x).checked = false;
+        }
+        main.housearray=[];
+        main.regionarray=[];
+        main.pagearray=[];
+    };
+
     //Option selector for first filter
     this.selected_first = function(id){
       main.id1=id;
       main.id2=0;
+      main.unCheckAndEmptyArray();
       if(main.id1==1)
       {
         main.first_click="Type";
@@ -54,6 +72,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
     //Option selector for second filter
     this.selected_second = function(id){
       main.id2=id;
+      main.unCheckAndEmptyArray();
       main.filter_items();
     };
 
@@ -64,6 +83,27 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
     //Option selector for third filter
     this.selected_third = function(type,id,value){
       main.currentPage = 0;
+      if(type==2)
+      {
+         if(document.getElementById(id).checked)
+        {
+            //Push a region in the array
+            for(var i in value)
+            main.pagearray.push(value[i]);
+          
+        }
+        else
+        {
+          //Remove a region from the array
+          for(var i in value)
+          {
+            var index = main.pagearray.indexOf(value[i]);
+            if (index > -1) {
+              main.pagearray.splice(index, 1);
+              }
+          }
+        }
+      }
       if(type==0)
       {
         if(document.getElementById(id).checked)
@@ -186,6 +226,24 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
         else
           return true;
     };
+ //Get region for selected house
+    this.pages=function(p,index){
+      console.log("called");
+        if(p.hasOwnProperty('isbn'))
+        {
+          if(main.pagearray.length!=0)
+          {
+            return main.pagearray.indexOf(p.numberOfPages) !== -1;
+          }
+          else
+          {
+            return true;
+          }
+        }
+        else
+          return true;
+    };
+
 
     //Custom Filter function
     this.filter_item=function(item,index){
@@ -229,7 +287,7 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
       {
         $('#srow').hide();
         //Find if its a book
-        if(item.hasOwnProperty('isbn'))
+        if(item.hasOwnProperty('isbn')&&main.pages(item,index))
           return true;
         else
           return false;
