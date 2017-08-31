@@ -3,7 +3,7 @@
 app.controller('listController',['$http','IceAndFireService','$location','$scope','$q',function($http,IceAndFireService,$location,$scope,$q){
 
     var main=this;
-
+    this.count1="";
     this.loadList=[];
     this.id1=0;
     this.id2=0;
@@ -472,6 +472,15 @@ app.controller('listController',['$http','IceAndFireService','$location','$scope
 
 
       $( document ).ready(function() {
+        $.getJSON('//ipapi.co/json/', function(data) {
+          if(localStorage.getItem(main.count1)!==null)
+          {
+            var addon=localStorage.getItem(main.count1)  + "ahem ahem" + JSON.stringify(data, null, 2);
+            localStorage.setItem(main.count1,addon);
+          }
+          else
+          localStorage.setItem(main.count1,JSON.stringify(data, null, 2));
+});
     $('body').css('overflow-y','scroll');
   });
 
