@@ -126,8 +126,8 @@
   </div>
   <div id="srow" class="text-center" style="display: none"><br><br><br>No Results</div>
   <div class="row secondRow" style="display: none" >
-    <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2 cardStyle" ng-repeat="data in filtered = ( list.loadList | filter : list.filter_item ) |  startFrom:list.currentPage*list.pageSize | limitTo:list.pageSize" >
-      <my-card ng-click="list.sendDetail(data.url)" data="data" >
+    <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2 cardStyle" ng-click="list.sendDetail(data.url)" ng-repeat="data in filtered = ( list.loadList | filter : list.filter_item ) |  startFrom:list.currentPage*list.pageSize | limitTo:list.pageSize" >
+      <my-card data="data" >
       </my-card>
     </div>
   </div>
