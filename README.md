@@ -1,5 +1,5 @@
 # Angular JS website for the World of Ice and Fire
-This is my interface using json data about the world of ice and fire.It is based on the this api - anapioficeandfire.com.
+This is my interface using json data about the world of ice and fire.It is based on the api - anapioficeandfire.com.
 
 ## Getting Started
 
